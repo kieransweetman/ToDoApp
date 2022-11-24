@@ -1,0 +1,1 @@
+Info pertitent du projet concernant le DB et model MCD
