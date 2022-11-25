@@ -1,5 +1,8 @@
 <header>
 
+    <!-- Rajouter balise de connection  -->
+    <h2><?php echo $TitrePage; ?></h2>
+
     <nav>
 
         <a href='index.php'>Mes projets</a>

@@ -1,20 +1,18 @@
-<h1>
-    <?php echo $message; ?>
-</h1>
-
 <p>
-    <?php echo $main; ?>
+    <?php echo $hello; ?>
 </p>
 
-<?php
-if ($connected !== true) :
-?>
+<a href="#"> Créer un projet</a>
 
-    <form method='POST' action=''>
-        <input name='user' type='text' placeholder='Votre email'>
-        <input name='pwd' type='password' placeholder="Votre mot de passe">
-        <input type='submit' name='submit' value='Se connecter'>
-    </form>
+<p>
+    <?php echo $liste; ?>
+</p>
 
-<?php
-endif;
+
+<!-- Rajouter balise de connection  -->
+
+<form method='POST' action=''>
+    <input name='user' type='text' placeholder='Votre email'>
+    <input name='pwd' type='password' placeholder="Votre mot de passe">
+    <input type='submit' name='submit' value='Se connecter'>
+</form>

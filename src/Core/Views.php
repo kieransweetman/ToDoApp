@@ -10,7 +10,7 @@ class Views
 
     public function __construct($content, $title)
     {
-        $this->folder = dirname(__FILE__) . '/../Views/Template/';
+        $this->folder = dirname(__FILE__) . '/../Views/Templates/';
         $this->page = dirname(__FILE__) . '/../Views/' . $content . '.php';
         $this->vars['title'] = $title;
     }

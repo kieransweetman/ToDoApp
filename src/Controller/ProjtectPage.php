@@ -9,9 +9,10 @@ class ProjtectPage
 
     public function __construct()
     {
-        $view = new Views('ProjectPage', 'Mes projets');
-        $view->setVar('message', 'Bienvenue sur mon appli');
-        $view->setVar('main', '<br>On est bien ici');
+        $view = new Views('ProjectPage', 'Accueil');
+        $view->setVar('TitrePage', 'Mes Projets');
+        $view->setVar('hello', 'Hello');
+        $view->setVar('liste', 'Liste de mes projets');
         $view->render();
     }
 }
