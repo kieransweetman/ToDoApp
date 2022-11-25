@@ -2,12 +2,6 @@
     <?php echo $hello; ?>
 </p>
 
-<a href="#"> Créer un projet</a>
-
-<p>
-    <?php echo $liste; ?>
-</p>
-
 
 <!-- Rajouter balise de connection  -->
 

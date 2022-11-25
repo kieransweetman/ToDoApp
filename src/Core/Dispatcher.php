@@ -2,7 +2,7 @@
 
 namespace Digi\Todoapp\Core;
 
-use Digi\Todoapp\Controller\ProjectPage;
+use Digi\Todoapp\Controller\DefaultPageController;
 
 // Dispatcher pour aller de page en page
 
@@ -14,6 +14,9 @@ class Dispatcher
         //rajouter isset pour la connection
         if (isset($_GET['page'])) {
             switch ($_GET['page']) {
+                case 'afficheprojets':
+                    echo 'Page Mes projets';
+                    break;
                 case 'affichetaches':
                     echo 'Page Mes taches';
                     break;
@@ -22,11 +25,11 @@ class Dispatcher
                     break;
                 default:
                     //page de login qui apparait par defaut
-                    new ProjectPage();
+                    new DefaultPageController();
                     break;
             }
         } else {
-            new ProjectPage();
+            new DefaultPageController();
         }
     }
 }
