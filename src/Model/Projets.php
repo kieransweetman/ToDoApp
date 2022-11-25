@@ -46,4 +46,24 @@ class Projets{
 
         return $this;
     }
+
+    /**
+     * Get the value of taches
+     */ 
+    public function getTaches()
+    {
+        return $this->taches;
+    }
+
+    /**
+     * Set the value of taches
+     *
+     * @return  self
+     */ 
+    public function setTaches($taches)
+    {
+        $this->taches = $taches;
+
+        return $this;
+    }
 }
