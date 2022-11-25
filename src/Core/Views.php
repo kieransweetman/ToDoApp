@@ -1,4 +1,4 @@
-<?
+<?php
 
 namespace Digi\Todoapp\Core;
 
@@ -39,10 +39,10 @@ class Views
     {
         extract($this->vars);
         ob_start();
-        include_once($this->getHead());
-        include_once($this->getHeader());
-        include_once($this->page);
-        include_once($this->getFooter());
+        include_once $this->getHead();
+        include_once $this->getHeader();
+        include_once $this->page;
+        include_once $this->getFooter();
         ob_end_flush();
     }
 }
