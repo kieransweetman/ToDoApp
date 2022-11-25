@@ -1,6 +1,6 @@
 <?
 
-use Digi\Todoapp\Controller;
+namespace Digi\Todoapp\Controller;
 
 
 class UserController
