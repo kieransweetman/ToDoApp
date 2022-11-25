@@ -7,9 +7,9 @@ use Digi\Todoapp\Core\Model;
 class Users extends Model{
     
     private $id;
-    private $pseudo;
-    private $mail;
-    private $pwd;
+    private string $pseudo;
+    private string $mail;
+    private string $pwd;
 
 
     /**
