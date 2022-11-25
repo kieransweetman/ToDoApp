@@ -1,4 +1,6 @@
-<?
-require 'vendor/autoload.php';
+<?php
+require('vendor/autoload.php');
 
-echo "it workds";
+use Digi\Todoapp\Core\Dispatcher;
+
+new Dispatcher();
