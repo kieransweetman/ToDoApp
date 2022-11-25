@@ -1,0 +1,13 @@
+{
+    "name": "digi/todoapp",
+    "description": "une appli de gestionaire de taches",
+    "type": "project",
+    "license": "mit",
+    "autoload": {
+        "psr-4": {
+            "Digi\\Todoapp\\": "src/"
+        }
+    },
+    "minimum-stability": "stable",
+    "require": {}
+}
