@@ -2,7 +2,7 @@
 
 namespace Digi\Todoapp\Core;
 
-use Digi\Todoapp\Controller\ProjtectPage;
+use Digi\Todoapp\Controller\ProjectPage;
 
 // Dispatcher pour aller de page en page
 
@@ -22,11 +22,11 @@ class Dispatcher
                     break;
                 default:
                     //page de login qui apparait par defaut
-                    new ProjtectPage();
+                    new ProjectPage();
                     break;
             }
         } else {
-            new ProjtectPage();
+            new ProjectPage();
         }
     }
 }
