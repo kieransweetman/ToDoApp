@@ -18,11 +18,14 @@ class Security
 
     public static function ConnectUser()
     {
-        $pseudo = $_POST['user'];
+        $pseudo = $_POST['pseudo'];
         $pwd = $_POST['pwd'];
-        $searchUser = Users::getByAttribute('pseudo', $pseudo);
+        $searchPseudo = Users::getByAttribute('pseudo', $pseudo);
 
-        if ($pseudo === $searchUser[0]->getMail() && password_verify($_POST['pwd'], $searchUser[0]->getPwd())) {
+        // look into adding a cookie for user authentification 
+        // and getting their login when they dont kill their own session
+        // to add -> password_verify(), nous avons pas le hash pour les mot de pass encore
+        if ($pseudo === $searchPseudo[0]->getPseudo() && $pwd === $searchPseudo[0]->getPwd()) {
             session_start();
             $_SESSION['connected'] = true;
         }
