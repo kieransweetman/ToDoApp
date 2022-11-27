@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:8889
--- Généré le : dim. 27 nov. 2022 à 15:10
+-- Généré le : dim. 27 nov. 2022 à 15:24
 -- Version du serveur :  5.7.34
 -- Version de PHP : 8.0.8
 
@@ -119,7 +119,19 @@ INSERT INTO `taches` (`id`, `titre`, `priorite`, `statut`, `description`, `id_us
 (3, 'Tâche 2 - 3', '1', 'Terminé', 'Tâche 2 - 3 Description', 4, 3),
 (7, 'Tâche 1 - 1', '3', 'Non Débuté', 'Tâche 1 - 1 Description', 5, 2),
 (8, 'Tâche 1 - 2', '2', 'En Cours', 'Tâche 1 - 2 Description', 6, 2),
-(9, 'Tâche 1 - 3', '1', 'Terminé', 'Tâche 1 - 3 Description', 2, 2);
+(9, 'Tâche 1 - 3', '1', 'Terminé', 'Tâche 1 - 3 Description', 2, 2),
+(10, 'Tâche 3 - 1', '3', 'Non Débuté', 'Tâche 3 - 1 Description', 1, 4),
+(11, 'Tâche 3 - 2', '2', 'En Cours', 'Tâche 3 - 2 Description', 2, 4),
+(12, 'Tâche 3 - 3', '1', 'Terminé', 'Tâche 3 - 3 Description', 4, 4),
+(13, 'Tâche 4 - 1', '3', 'Non Débuté', 'Tâche 4 - 1 Description', 5, 5),
+(14, 'Tâche 4 - 2', '2', 'En cours', 'Tâche 4 - 2 Description', 6, 5),
+(15, 'Tâche 4 - 3', '1', 'Terminé', 'Tâche 4 - 3 Description', 1, 5),
+(16, 'Tâche 5 - 1', '3', 'Non Débuté', 'Tâche 5 - 1 Description', 2, 6),
+(17, 'Tâche 5 - 2', '2', 'En Cours', 'Tâche 5 - 2 Description', 3, 6),
+(18, 'Tâche 5 - 3', '1', 'Terminé', 'Tâche 5 - 3', 6, 6),
+(19, 'Tâche 6 - 1', '3', 'Non Débuté', 'Tâche 6 - 1 Description', 4, 7),
+(20, 'Tâche 6 - 2', '2', 'En cours', 'Tâche 6 - 2 Description', 5, 7),
+(21, 'Tâche 6 - 3', '1', 'Terminé', 'Tâche 6 - 3 Description', 3, 7);
 
 -- --------------------------------------------------------
 
@@ -191,7 +203,7 @@ ALTER TABLE `projets`
 -- AUTO_INCREMENT pour la table `taches`
 --
 ALTER TABLE `taches`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT pour la table `users`
