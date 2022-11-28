@@ -3,6 +3,7 @@
 namespace Digi\Todoapp\Core;
 
 use Digi\Todoapp\Controller\DefaultPageController;
+use Digi\Todoapp\Controller\TachesController;
 
 // Dispatcher pour aller de page en page
 
@@ -18,7 +19,7 @@ class Dispatcher
                     echo 'Page Mes projets';
                     break;
                 case 'affichetaches':
-                    echo 'Page Mes taches';
+                    new TachesController();
                     break;
                 case 'affichecompte':
                     echo 'Page mon compte';

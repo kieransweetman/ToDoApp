@@ -20,7 +20,6 @@ class DefaultPageController
 
         if (Security::isConnected()) {
             $pseudo = $_POST['pseudo'];
-            echo $pseudo;
             $view->setVar("pseudo", $pseudo);
             $view->setVar('connected', true);
         } else {

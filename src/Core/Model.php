@@ -4,8 +4,7 @@ namespace Digi\Todoapp\Core;
 
 class Model
 {
-    // change dbname -> projetmcd, this is the correct dbname
-    private static $dsn = 'mysql:dbname=mcdprojet;host=localhost';
+    private static $dsn = 'mysql:dbname=projetmcd;host=localhost';
     private static $username = 'projet2';
     private static $password = 'projet2';
     public static $instance = NULL;
@@ -37,6 +36,13 @@ class Model
     public static function getAll()
     {
         $query = self::getInstance()->query('select * from ' . self::getClass());
+        return $query->fetchAll(\PDO::FETCH_CLASS, get_called_class());
+    }
+
+
+    public static function getAllOrderBy($colonneDeTri)
+    {
+        $query = self::getInstance()->query('select * from ' . self::getClass() . ' order by ' . $colonneDeTri);
         return $query->fetchAll(\PDO::FETCH_CLASS, get_called_class());
     }
 
