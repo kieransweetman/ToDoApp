@@ -12,6 +12,7 @@ class UserController
 {
     public function __construct()
     {
+        
         $this->createUser();
     }
 
@@ -19,13 +20,11 @@ class UserController
     public function createUser()
     {
         $view = new Views('CreateUpdateCompte', 'Création d\'un utilisateur');
-        $view->setVar('TitrePage', 'Créer / Modifier mon compte');
+        $view->setVar('TitrePage', 'Créer mon compte');
         if (Security::isConnected()) {
             $view->setVar('connected', true);
-            // $view->setVar('pseudo', $_SESSION['pseudo']);
-            //User::getbyid($_SESSION['id]->getmail)
         } else {
-            header('location: index.php');
+            $view->setVar('connected', false);
         }
         if (isset($_POST['submit'])) {
             if (($message = $this->isValid()) === '') {
@@ -43,6 +42,31 @@ class UserController
         }
 
         $view->render();
+        // $view->setVar('pseudo', $_SESSION['pseudo']);
+            //User::getbyid($_SESSION['id]->getmail)
+    }
+
+    // Fonction pour modifier le User
+    public function UpdateEleve() {
+        $view = new Views('CreateUpdateCompte','Modifier mon compte');
+        if (Security::isConnected()) {
+            $view->setVar('connected', true);
+        } else {
+            header('location: index.php');
+        }
+        $view->setVar('action','&update='.$_GET['update']);
+        if (isset($_POST['create'])) {
+            if (($message=$this->isValid()) === '') {
+                if (Users::updateById()) {
+                    $view->setVar('message', 'L\'élève a bien été mis à jour');
+                } else {
+                    $view->setVar('message', 'Une erreur est survenue');
+                }
+            } else {
+                $view->setVar('message',$message);
+            }
+        }
+        
     }
 
     // Fonction pour vérifier les entrées du formulaire

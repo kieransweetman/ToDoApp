@@ -6,12 +6,12 @@
     <nav>
 <!-- Barre de anvigation qui s'affiche à toutes les pages -->
         <a href='index.php'>Accueil</a>
-        <?php if ($connected) : ?>
+        <?php if ($connected) : ?> 
             <a href='index.php?page=afficheprojets'>Mes projets</a>
             <a href='index.php?page=affichetaches'>Mes taches</a>
             <a href='index.php?page=CreateUpdateCompte'>Mon compte </a>
             <a href='index.php?page=index&session=0'>Déconnexion</a>
         <?php endif ?>
-    </nav>
+    </nav><br>
 
 </header>

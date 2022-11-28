@@ -17,5 +17,7 @@
         <input name='pseudo' type='text' placeholder='Pseudo'>
         <input name='pwd' type='password' placeholder="Votre mot de passe">
         <input type='submit' name='submit' value='Se connecter'>
+        
     </form>
-<?php endif;
+    <a href='index.php?page=CreateUpdateCompte'> Créer un compte</a>
+<?php endif; ?>
