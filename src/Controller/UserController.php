@@ -15,15 +15,18 @@ class UserController
         $this->createUser();
     }
 
+    // Fonction pour créer un utilisateur
     public function createUser()
     {
         $view = new Views('CreateUpdateCompte', 'Création d\'un utilisateur');
         $view->setVar('TitrePage', 'Créer / Modifier mon compte');
-        // if (Security::isConnected()) {
-        //     $view->setVar('connected', true);
-        // } else {
-        //     header('location: index.php');
-        // }
+        if (Security::isConnected()) {
+            $view->setVar('connected', true);
+            // $view->setVar('pseudo', $_SESSION['pseudo']);
+            //User::getbyid($_SESSION['id]->getmail)
+        } else {
+            header('location: index.php');
+        }
         if (isset($_POST['submit'])) {
             if (($message = $this->isValid()) === '') {
                 unset($_POST['submit']);
@@ -42,6 +45,7 @@ class UserController
         $view->render();
     }
 
+    // Fonction pour vérifier les entrées du formulaire
     private function isValid()
     {
         $return = '';

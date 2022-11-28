@@ -1,10 +1,10 @@
 <header>
 
-
+<!-- Définit le titre en haut de la page -->
     <h2><?php echo $TitrePage; ?></h2>
 
     <nav>
-
+<!-- Barre de anvigation qui s'affiche à toutes les pages -->
         <a href='index.php'>Accueil</a>
         <?php if ($connected) : ?>
             <a href='index.php?page=afficheprojets'>Mes projets</a>

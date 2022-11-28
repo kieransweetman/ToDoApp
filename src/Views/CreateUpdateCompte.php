@@ -1,9 +1,11 @@
 <?php
+//affichage des messages d'erreurs
 if (isset($message)) {
     echo '<div>' . $message . '</div>';
 }
 ?>
 
+<!-- formulaire pour compléter son profil -->
 <form method='POST' action='index.php?page=<?php echo $_GET['page']; ?>&insert=1'>
     <input type='text' name='pseudo' placeholder='Votre pseudo' value="<?php echo (isset($pseudo)) ? $pseudo : ''; ?>"><br> <br>
     <input type='email' name='mail' placeholder='Votre mail' value="<?php echo (isset($mail)) ? $mail : ''; ?>"><br> <br>
