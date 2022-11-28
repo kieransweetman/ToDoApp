@@ -8,10 +8,8 @@ use Digi\Todoapp\Model\Users;
 
 class DefaultPageController
 {
-
     public function __construct()
     {
-
         $view = new Views('DefaultPage', 'Accueil');
 
         if (isset($_POST['submit'])) {
@@ -19,10 +17,7 @@ class DefaultPageController
         }
 
         if (Security::isConnected()) {
-            $pseudo = $_POST['pseudo'];
-            $view->setVar("pseudo", $pseudo);
             $view->setVar('connected', true);
-            
         } else {
             $view->setVar('connected', false);
         }
