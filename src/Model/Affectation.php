@@ -69,10 +69,7 @@ class Affectation extends Model
 
         return $this;
     }
-    public function getId_projets()
-    {
-        return $this->id_projets;
-    }
+
     public function getId_user()
     {
         return $this->id_users;
