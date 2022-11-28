@@ -37,6 +37,7 @@ class Security
             session_start();
             $_SESSION['connected'] = true;
             $_SESSION['pseudo'] = $_POST['pseudo'];
+            $_SESSION['id'] = $searchUser[0]->getId();
         }
     }
 }
