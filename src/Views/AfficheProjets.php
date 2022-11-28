@@ -8,7 +8,9 @@ foreach($projets as $projet){
     echo "<a href='index.php?page=".$_GET['page']."&insert=tache".$projet->getId()."'>Ajouter tâche</a><br>";
     foreach($taches as $tache){
         if($tache->id_projets === $projet->getId()){
-            echo $tache->getTitre();
+            echo $tache->getTitre().' ';
+            echo $tache->getPriorite().' ';
+            echo $tache->getStatut().' ';
             echo '<br>';
         }
     }

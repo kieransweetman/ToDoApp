@@ -14,8 +14,8 @@ class ProjetController {
 
     public function AfficheProjets(){
         $view = new Views('AfficheProjets','Liste des Projets');
-        $projets = Projets::getAll();
-        $taches = Taches::getAll();
+        $projets = Projets::getAllOrderBy('id');
+        $taches = Taches::getAllOrderBy('priorite');
         $view->setVar('projets',$projets);
         $view->setVar('taches',$taches);
         $view->setVar('TitrePage', 'Mes Projets');

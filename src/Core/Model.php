@@ -34,6 +34,12 @@ class Model {
         return $query->fetchAll(\PDO::FETCH_CLASS, get_called_class());
     }
 
+    //Get All avec Order by
+    public static function getAllOrderBy($colonneDeTri) {
+        $query = self::getInstance()->query('select * from '.self::getClass().' order by '.$colonneDeTri);
+        return $query->fetchAll(\PDO::FETCH_CLASS, get_called_class());
+    }
+
     public static function getById($id) {
         $query = self::getInstance()->query('select * from '.self::getClass().' where id='.$id);
         return $query->fetchAll(\PDO::FETCH_CLASS, get_called_class());
