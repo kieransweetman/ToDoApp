@@ -4,6 +4,7 @@ namespace Digi\Todoapp\Controller;
 
 use Digi\Todoapp\Core\Security;
 use Digi\Todoapp\Core\Views;
+use Digi\Todoapp\Model\Affectation;
 use Digi\Todoapp\Model\Projets;
 use Digi\Todoapp\Model\Taches;
 use Digi\Todoapp\Model\Users;
@@ -24,9 +25,11 @@ class ProjetController {
         $projets = Projets::getAllOrderBy('id');
         $taches = Taches::getAllOrderBy('priorite');
         $users = Users::getAll();
+        $affectations = Affectation::getAll();
         $view->setVar('projets',$projets);
         $view->setVar('taches',$taches);
         $view->setVar('users',$users);
+        $view->setVar('affectations',$affectations);
         $view->setVar('TitrePage', 'Mes Projets');
         $view->render();
     }
