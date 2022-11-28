@@ -17,14 +17,12 @@ class DefaultPageController
         }
         if (Security::isConnected()) {
             $view->setVar('connected', true);
+            
         } else {
             $view->setVar('connected', false);
         }
-
         $view->setVar('TitrePage', 'Mes Projets');
         $view->setVar('hello', 'Hello');
-
-
         $view->render();
     }
 }
