@@ -19,6 +19,10 @@ class TachesController
     private function AffichesTaches()
     {
         $view = new Views('AfficheTaches', 'Mes Taches');
+        $view->setVar('TitrePage', 'Mes Taches');
+
+
+
 
         if (Security::isConnected()) {
             $view->setVar('connected', true);

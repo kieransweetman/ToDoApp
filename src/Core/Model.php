@@ -71,12 +71,8 @@ class Model
     public static function create()
     {
         $vars = self::clear();
-        $sql = 'insert into ' . self::getClass() . ' values(' . $vars[0] . ')';
-        var_dump($sql);
-        var_dump($vars);
-        return self::getInstance()
-            ->prepare($sql)
-            ->execute($vars[1]);
+        $sql = 'insert into ' . self::getClass() . " values(" . $vars[0] . ")";
+        return self::getInstance()->prepare($sql)->execute($vars[1]);
     }
 
     public static function updateById()
