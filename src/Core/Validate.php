@@ -5,7 +5,7 @@ namespace Digi\Todoapp\Core;
 class Validate{
     public static function ValidatePseudo($pseudo, $message) {
         $return = '';
-        $pattern ="/^([a-zA-Z' -]+)$/";
+        $pattern ="/^([a-zA-Z' - 0-9]+)$/";
         if (!preg_match($pattern, $pseudo)) {
             $return = $message;
         }
