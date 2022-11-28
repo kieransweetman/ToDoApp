@@ -1,7 +1,7 @@
 <p>
     <?php
     echo $hello;
-    if ($connected === true) {
+    if ($connected) {
         echo " " . $pseudo;
     } ?>
 </p>

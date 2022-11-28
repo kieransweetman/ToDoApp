@@ -19,9 +19,6 @@ class TachesController
     {
         $view = new Views('AfficheTaches', "Mes Taches");
         $projets = Projets::getAllOrderBy('id');
-        echo "<pre>";
-        var_dump($projets);
-        echo "</pre>";
         $taches = Taches::getAllOrderBy('priorite');
         $view->setVar('taches', $taches);
         $view->setVar('projets', $projets);
