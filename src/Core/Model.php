@@ -45,8 +45,13 @@ class Model
         return $query->fetchAll(\PDO::FETCH_CLASS, get_called_class());
     }
 
-    //Get All avec Order by
-    public static function getAllOrderBy($colonneDeTri)
+    /**
+     * Récupère toutes les lignes d'une table en effectuant un tri
+     *
+     * @param string $colonneDeTri => le tri se fait en fonction de cette colonne
+     * @return array
+     */
+    public static function getAllOrderBy($colonneDeTri):array
     {
         $query = self::getInstance()->query(
             'select * from ' . self::getClass() . ' order by ' . $colonneDeTri
@@ -65,6 +70,19 @@ class Model
     public static function deleteById($id)
     {
         $sql = 'delete from ' . self::getClass() . ' where id=' . $id;
+        $query = self::getInstance()->exec($sql);
+    }
+
+    /**
+     * Suppression par un nom de colonne
+     *
+     * @param string $name => Nom de la colonne
+     * @param string $attribut => Valeur de la colonne
+     * @return void
+     */
+    public static function deleteByAttribute($name, $attribut)
+    {
+        $sql = 'delete from ' . self::getClass() . ' where '.$name.'=' . $attribut;
         $query = self::getInstance()->exec($sql);
     }
 
