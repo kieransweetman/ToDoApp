@@ -3,6 +3,7 @@
 namespace Digi\Todoapp\Core;
 
 use Digi\Todoapp\Controller\DefaultPageController;
+use Digi\Todoapp\Controller\ProjetController;
 
 // Dispatcher pour aller de page en page
 
@@ -16,6 +17,7 @@ class Dispatcher
             switch ($_GET['page']) {
                 case 'afficheprojets':
                     echo 'Page Mes projets';
+                    new ProjetController();
                     break;
                 case 'affichetaches':
                     echo 'Page Mes taches';

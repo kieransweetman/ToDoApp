@@ -2,7 +2,9 @@
 
 namespace Digi\Todoapp\Model;
 
-class Taches {
+use Digi\Todoapp\Core\Model;
+
+class Taches extends Model{
     private $id;
     private string $titre;
     private string $priorite;

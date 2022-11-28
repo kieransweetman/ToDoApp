@@ -2,7 +2,9 @@
 
 namespace Digi\Todoapp\Model;
 
-class Projets{
+use Digi\Todoapp\Core\Model;
+
+class Projets extends Model{
     private $id;
     private string $libelle;
     private array $taches;
