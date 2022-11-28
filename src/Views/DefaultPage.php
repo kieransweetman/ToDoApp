@@ -1,18 +1,20 @@
 <p>
-    <?php echo $hello; ?>
+    <?php
+    echo $hello;
+    if ($connected) {
+        echo ' ' . $_SESSION['pseudo'];
+    }
+    ?>
+
 </p>
 
 
 <!-- Rajouter balise de connection  -->
 
 
-<?php
-if ($connected != true) :
-
-
-?>
-    <form method='POST' action=''>
-        <input name='user' type='text' placeholder='Votre Pseudo'>
+<?php if ($connected != true) : ?>
+    <form method='POST' action='index.php'>
+        <input name='pseudo' type='text' placeholder='Pseudo'>
         <input name='pwd' type='password' placeholder="Votre mot de passe">
         <input type='submit' name='submit' value='Se connecter'>
     </form>
