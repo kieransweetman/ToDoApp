@@ -47,15 +47,10 @@
 
                         </form>
                     </div>
-                <?php endif; ?>
-
-
-
-            <?php
-
-
-            }
-            ?>
+                <?php endif ; 
+                } 
+                
+                ?>
         </section> <?php
                 };
                     ?>

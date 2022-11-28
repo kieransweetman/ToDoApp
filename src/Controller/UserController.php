@@ -19,11 +19,11 @@ class UserController
     {
         $view = new Views('CreateUpdateCompte', 'Création d\'un utilisateur');
         $view->setVar('TitrePage', 'Créer / Modifier mon compte');
-        // if (Security::isConnected()) {
-        //     $view->setVar('connected', true);
-        // } else {
-        //     header('location: index.php');
-        // }
+        if (Security::isConnected()) {
+            $view->setVar('connected', true);
+        } else {
+            header('location: index.php');
+        }
         if (isset($_POST['submit'])) {
             if (($message = $this->isValid()) === '') {
                 unset($_POST['submit']);
