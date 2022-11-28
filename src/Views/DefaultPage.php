@@ -2,8 +2,8 @@
     <?php echo $hello; 
     if ($connected){
         echo ' '.$_SESSION['pseudo'];
-    }?>
-    
+    }
+    var_dump($_SESSION);?>
 </p>
 
 

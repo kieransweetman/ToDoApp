@@ -1,4 +1,5 @@
 <?php
+var_dump($_SESSION);
 echo "<a href='index.php?page=".$_GET['page']."&insert=projet'>Créer un nouveau projet</a><br>";
 echo "<h2>Liste de mes projets</h2>";
 //Boucle pour afficher les projets
