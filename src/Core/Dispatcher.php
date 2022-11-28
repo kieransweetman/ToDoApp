@@ -3,6 +3,7 @@
 namespace Digi\Todoapp\Core;
 
 use Digi\Todoapp\Controller\DefaultPageController;
+use Digi\Todoapp\Controller\UserController;
 
 // Dispatcher pour aller de page en page
 
@@ -20,8 +21,8 @@ class Dispatcher
                 case 'affichetaches':
                     echo 'Page Mes taches';
                     break;
-                case 'affichecompte':
-                    echo 'Page mon compte';
+                case 'CreateUpdateCompte':
+                    new UserController();
                     break;
                 default:
                     //page de login qui apparait par defaut
