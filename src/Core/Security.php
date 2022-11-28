@@ -8,7 +8,10 @@ class Security
 {
     public static function isConnected()
     {
-        session_start();
+        if (session_status() !== 2) {
+            session_start();
+        }
+
         if (isset($_SESSION['connected']) && $_SESSION['connected'] === true) {
             return true;
         }
@@ -20,14 +23,16 @@ class Security
     {
         $pseudo = $_POST['pseudo'];
         $pwd = $_POST['pwd'];
-        $searchPseudo = Users::getByAttribute('pseudo', $pseudo);
+        $searchUser = Users::getByAttribute('pseudo', $pseudo);
 
-        // look into adding a cookie for user authentification
-        // and getting their login when they dont kill their own session
-        // to add -> password_verify(), nous avons pas le hash pour les mot de pass encore
+        // if ($pseudo === $searchUser[0]->getMail() && password_verify($_POST['pwd'], $searchUser[0]->getPwd())) {
+        //     session_start();
+        //     $_SESSION['connected'] = true;
+        // }
+
         if (
-            $pseudo === $searchPseudo[0]->getPseudo() &&
-            $pwd === $searchPseudo[0]->getPwd()
+            $pseudo === $searchUser[0]->getPseudo() &&
+            $_POST['pwd'] === $searchUser[0]->getPwd()
         ) {
             session_start();
             $_SESSION['connected'] = true;
