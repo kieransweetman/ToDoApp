@@ -18,6 +18,13 @@ class TachesController
     private function AffichesTaches()
     {
         $view = new Views('AfficheTaches', 'Mes Taches');
+
+        if (Security::isConnected()) {
+            $view->setVar('connected', true);
+        } else {
+            header('location: index.php');
+        }
+
         $projets = Projets::getAllOrderBy('id');
         $taches = Taches::getAllOrderBy('priorite');
         $view->setVar('taches', $taches);
