@@ -10,20 +10,20 @@ class Affectation extends Model
     private $id_users;
     private bool $admin;
 
-    public static function createAffectation($id_projet)
+    public static function createAffectation($id_projet, $id_users, $isadmin)
     {
-        $vars = self::clearAffectation($id_projet);
+        $vars = self::clearAffectation($id_projet, $id_users, $isadmin);
         $sql = 'insert into affectation'. " values(" . $vars[0] . ")";
         return self::getInstance()->prepare($sql)->execute($vars[1]);
     }
 
-    private static function clearAffectation($id_projet)
+    private static function clearAffectation($id_projet, $id_users, $isadmin)
     {
         $return[] = ':id_projets,:id_users,:admin';
         if (isset($_GET['insert'])) {
             $return[1]['id_projets'] = $id_projet;
-            $return[1]['id_users'] = $_SESSION['id'];
-            $return[1]['admin'] = '1';
+            $return[1]['id_users'] = $id_users;
+            $return[1]['admin'] = $isadmin;
         }
         return $return;
     }
