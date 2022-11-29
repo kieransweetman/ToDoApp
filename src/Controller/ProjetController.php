@@ -26,8 +26,8 @@ class ProjetController
                 new TachesController;
             }
 
-
-            $this->AfficheProjets();
+            return;
+        
         }
 
         $this->AfficheProjets();

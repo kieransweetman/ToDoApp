@@ -18,12 +18,17 @@ class TachesController
             $data = explode("/", $_GET['insert']);
             $projet = $data[1];
             var_dump($_POST['submit']);
+            return;
+        } else {
+            $this->createTache();
+            return;
         }
 
         if (isset($_POST['submit'])) {
             $this->changeStatut();
+        } else {
+            $this->AffichesTaches();
         }
-        $this->AffichesTaches();
     }
 
     private function changeStatut()

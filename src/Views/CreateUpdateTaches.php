@@ -1,12 +1,3 @@
-<?php 
-
-?>
-
-<html>
-    <head>
-        <title>Create/Update tache</title>
-    </head>
-
 
 
     <h1>Create/ Update tache</h1>
@@ -14,8 +5,8 @@
     <div>
         <h2>Titre du projet</h2>
         <div>
-            <label for="nomTache">Nom de la tâche:</label>
-            <input type="text" id="nomTache" name="nomTache"> 
+            <label for="titre">Nom de la tâche:</label>
+            <input type="text" id="titre" name="titre"> 
         </div>
 
         <div>
@@ -26,16 +17,16 @@
         <div>
             <label for="statut">Statut:</label>
                 <select name="statut" id="statut" style="height:50%; margin: 16px 0px;">
-                    <option value="" <?php if ($tache->getStatut() === null) : ?> disabled selected <? endif; ?>>Statut</option>
-                    <option value="" <?php if ($tache->getStatut() === "Non Débuté") : ?> selected <? endif; ?>>Non débuté </option>
-                    <option value="" <?php if ($tache->getStatut() === "En Cours") : ?> selected <? endif; ?>>En cours</option>
-                    <option value="" <?php if ($tache->getStatut() === "Terminé") : ?> selected <? endif; ?>>Terminé</option>
+                    <option value="" disabled selected>Statut</option>
+                    <option value="Non Débuté">Non débuté </option>
+                    <option value="En Cours">En cours</option>
+                    <option value="Terminé">Terminé</option>
                 </select>
         </div>
 
         <div>
-            <label for="affectation">Affectation:</label>
-            <select name="affectation" id="afectation">
+            <label for="user">Affectation:</label>
+            <select name="user" id="user">
                     <option>
 
                     </option>
@@ -48,7 +39,6 @@
         </div>
 
         <div>
-            <input type="button">
+            <input type="submit" value="valider">
         </div>
     </div>
-</html>
