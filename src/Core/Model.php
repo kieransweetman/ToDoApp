@@ -51,7 +51,7 @@ class Model
      * @param string $colonneDeTri => le tri se fait en fonction de cette colonne
      * @return array
      */
-    public static function getAllOrderBy($colonneDeTri):array
+    public static function getAllOrderBy($colonneDeTri): array
     {
         $query = self::getInstance()->query(
             'select * from ' . self::getClass() . ' order by ' . $colonneDeTri
@@ -82,7 +82,7 @@ class Model
      */
     public static function deleteByAttribute($name, $value)
     {
-        $sql = 'delete from ' . self::getClass() . ' where '.$name.'=' . $value;
+        $sql = 'delete from ' . self::getClass() . ' where ' . $name . '=' . $value;
         $query = self::getInstance()->exec($sql);
     }
 
@@ -90,7 +90,8 @@ class Model
     {
         $vars = self::clear();
         $sql = 'insert into ' . self::getClass() . " values(" . $vars[0] . ")";
-        return self::getInstance()->prepare($sql)->execute($vars[1]);
+        echo $sql;
+        // return self::getInstance()->prepare($sql)->execute($vars[1]);
     }
 
     public static function updateById()
@@ -125,9 +126,16 @@ class Model
         return $query->fetchAll(\PDO::FETCH_CLASS, get_called_class());
     }
 
+    public static function updateAttributeById($col, $value, $id)
+    {
+        $sql = 'update ' . \strtolower(self::getClass()) . ' set ' . $col . " = '" . $value . "' where id=" . $id;
+
+        $query = self::getInstance()->exec($sql);
+    }
+
     private static function clear()
     {
-        unset($_POST['create']);
+        unset($_POST['valider']);
         $return[] = ':id';
         if (isset($_GET['insert'])) {
             $return[] = ['id' => null];

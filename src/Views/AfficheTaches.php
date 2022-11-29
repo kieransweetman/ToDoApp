@@ -33,10 +33,10 @@
                                         <p>priorit <?php echo $tache->getPriorite(); ?></p>
                                         <label for="statut" style="margin: 16px 0px;"></label>
                                         <select name="statut" id="statut" style="height:50%; margin: 16px 0px;">
-                                            <option value="" <?php if ($tache->getStatut() === null) : ?> disabled selected <? endif; ?>>Statut</option>
-                                            <option value="" <?php if ($tache->getStatut() === "Non Débuté") : ?> selected <? endif; ?>>Non débuté </option>
-                                            <option value="dog" <?php if ($tache->getStatut() === "En Cours") : ?> selected <? endif; ?>>En cours</option>
-                                            <option value="cat" <?php if ($tache->getStatut() === "Terminé") : ?> selected <? endif; ?>>Terminé</option>
+                                            <option value=<?php echo "'Non Débuté/" . $tache->getId() . "'" ?> <?php
+                                                                                                                if ($tache->getStatut() === "Non Débuté") : ?> selected <? endif; ?>>Non débuté </option>
+                                            <option value=<?php echo "'En Cours/" . $tache->getId() . "'" ?> <?php if ($tache->getStatut() === "En Cours") : ?> selected <? endif; ?>>En cours</option>
+                                            <option value=<?php echo "'Terminé/" . $tache->getId() . "'" ?> <?php if ($tache->getStatut() === "Terminé") : ?> selected <? endif; ?>>Terminé</option>
                                         </select>
 
                                     </div>
@@ -47,7 +47,7 @@
                                         ?>
                                     </p>
 
-                                    <input type="submit" value="Valider" style="width: 3.5  rem;">
+                                    <input type="submit" name='submit' value="valider" style="width: 3.5  rem;">
 
                                 </form>
                             </div>
