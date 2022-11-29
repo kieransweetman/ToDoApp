@@ -21,7 +21,7 @@ class DefaultPageController
         } else {
             $view->setVar('connected', false);
         }
-        $view->setVar('TitrePage', 'Mes Projets');
+        $view->setVar('TitrePage', 'Acceuil');
         $view->setVar('hello', 'Hello');
         $view->render();
     }
