@@ -21,7 +21,6 @@ class Dispatcher
         if (isset($_GET['page'])) {
             switch ($_GET['page']) {
                 case 'afficheprojets':
-                    echo 'Page Mes projets';
                     new ProjetController();
                     break;
                 case 'affichetaches':
