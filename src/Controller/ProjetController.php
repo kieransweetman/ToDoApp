@@ -27,7 +27,6 @@ class ProjetController
             }
 
             return;
-        
         }
 
         $this->AfficheProjets();

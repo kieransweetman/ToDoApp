@@ -1,7 +1,7 @@
 <h1>Create/ Update tache</h1>
 
 <div>
-    <h2>Titre du projet</h2>
+    <h2><?php echo $projet_id; ?></h2>
     <div>
         <label for="titre">Nom de la tâche:</label>
         <input type="text" id="titre" name="titre">
@@ -37,6 +37,6 @@
     </div>
 
     <div>
-        <input type="submit" value="valider">
+        <input type="submit" value="valider" name='submit'>
     </div>
 </div>

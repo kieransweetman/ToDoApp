@@ -14,17 +14,24 @@ class TachesController
     public function __construct()
     {
         if (isset($_GET['insert'])) {
-            $this->createTache();
             $data = explode("/", $_GET['insert']);
             $projet = $data[1];
-            var_dump($_POST['submit']);
+            $this->createTache($projet);
+
             return;
         }
-
+        echo $_GET['page'];
+        if (isset($_POST['submit']) && isset($_GET['insert'])) {
+            var_dump($_POST['submit']);
+            echo 'test';
+        }
         if (isset($_POST['submit'])) {
             $this->changeStatut();
+            $this->AffichesTaches();
+            return;
         } else {
             $this->AffichesTaches();
+            return;
         }
     }
 
@@ -45,6 +52,7 @@ class TachesController
         } else {
             header('location: index.php');
         }
+        $view->setVar("projet_id", $projet_id);
         $view->render();
         // Taches::create();
         // 'insert into "table" values(NULL, titre, priorite, statut, description, id_users, id_projets) ';
