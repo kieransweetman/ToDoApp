@@ -27,10 +27,11 @@ class TachesController
             header('location: index.php');
         }
 
+
         $projets = Projets::getAllOrderBy('id');
         $taches = Taches::getAllOrderBy('priorite');
         $user = $_SESSION['id'];
-        $projs = Affectation::getProjetsByUser($user);
+        $projs = Affectation::getByAttribute('id_users', $user);
 
         $view->setVar('user', $user);
         $view->setVar('projs', $projs);
@@ -39,5 +40,3 @@ class TachesController
         $view->render();
     }
 }
-
-// recup le user

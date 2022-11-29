@@ -74,12 +74,4 @@ class Affectation extends Model
     {
         return $this->id_users;
     }
-
-    public static function getProjetsByUser($id)
-    {
-        $query = self::getInstance()->query(
-            'select * from affectation where id_users=' . $id
-        );
-        return $query->fetchAll(\PDO::FETCH_CLASS, get_called_class());
-    }
 }
