@@ -16,15 +16,19 @@ class TachesController
         if (isset($_GET['insert'])) {
             $data = explode("/", $_GET['insert']);
             $projet = $data[1];
-            $this->createTache($projet);
 
-            return;
+            $this->createTache($projet);
         }
-        echo $_GET['page'];
+
         if (isset($_POST['submit']) && isset($_GET['insert'])) {
-            var_dump($_POST['submit']);
-            echo 'test';
+
+            echo "<pre>";
+            Taches::create();
+            echo "</pre>";
         }
+
+        return;
+
         if (isset($_POST['submit'])) {
             $this->changeStatut();
             $this->AffichesTaches();

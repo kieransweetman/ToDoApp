@@ -29,6 +29,10 @@ class Dispatcher
                 case 'CreateUpdateCompte':
                     new UserController();
                     break;
+
+                case 'CreateUpdateTache':
+                    new TachesController;
+                    break;
                 default:
                     //page de login qui apparait par defaut
                     new DefaultPageController();

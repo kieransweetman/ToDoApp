@@ -20,14 +20,7 @@ class ProjetController
             $this->AfficheProjets();
         }
 
-        if (isset($_GET['insert'])) {
-            $action = explode("/", $_GET['insert']);
-            if ($action[0] === "tache") {
-                new TachesController;
-            }
 
-            return;
-        }
 
         $this->AfficheProjets();
     }

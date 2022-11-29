@@ -89,9 +89,9 @@ class Model
     public static function create()
     {
         $vars = self::clear();
-        $sql = 'insert into ' . self::getClass() . " values(" . $vars[0] . ")";
+        $sql = 'insert into ' . self::getClass() . " values(" . $vars[1] . ")";
         echo $sql;
-        // return self::getInstance()->prepare($sql)->execute($vars[1]);
+        return self::getInstance()->prepare($sql)->execute($vars[1]);
     }
 
     public static function updateById()
@@ -136,14 +136,17 @@ class Model
     private static function clear()
     {
         unset($_POST['valider']);
+
         $return[] = ':id';
         if (isset($_GET['insert'])) {
             $return[] = ['id' => null];
         }
+
         foreach ($_POST as $key => $value) {
             $return[0] .= ',:' . $key;
             $return[1][$key] = htmlspecialchars($value);
         }
+        var_dump($return);
         return $return;
     }
 }

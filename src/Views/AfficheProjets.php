@@ -11,7 +11,7 @@ foreach ($affectations as $affectation) {
             echo $projet->getLibelle();
             echo "<a href='index.php?page=" . $_GET['page'] . '&update=' . $projet->getId() . "'>Modifier</a> ";
             echo "<a href='index.php?page=" . $_GET['page'] . '&delete=' . $projet->getId() . "'>Supprimer</a> ";
-            echo "<a href='index.php?page=" . $_GET['page'] . '&insert=tache/' . $projet->getId() . "'>Ajouter une tâche</a><br>";
+            echo "<a href='index.php?page=CreateUpdateTache"  . '&insert=tache/' . $projet->getId() . "'>Ajouter une tâche</a><br>";
             //Apparition du bouton en cas de suppression
             if (isset($_GET['delete']) && $_GET['delete'] == $projet->getId()) {
                 echo "Êtes-vous certain(e) de vouloir effectuer la suppression? Le projet et toutes les tâches qui lui sont reliées seront supprimées";
