@@ -25,7 +25,7 @@ if (isset($message)) {
         <input type='email' name='mail' placeholder='Votre mail' value="<?php echo (isset($mail)) ? $mail : ''; ?>"><br> <br>
         <input type='password' name='pwd' placeholder='Nouveau mot de passe'> <br> <br>
         <input type='password' name='confirmpwd' placeholder='Confirmez votre mot de passe'><br> <br>
-        <input type='submit' name='modify' value="Modifier">
+        <input type='submit' name='create' value="Modifier">
     </form>
 
 <?php endif ?>
