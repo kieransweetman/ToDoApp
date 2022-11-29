@@ -23,6 +23,12 @@ class Validate
         return $return;
     }
 
+    /**
+     * Fonction pour vérifier que les mots de passes sont bien remplis
+     *
+     * @param [string] $pwd
+     * @return string
+     */
     public static function verifyPassword($pwd)
     {
         $return = '';
@@ -32,6 +38,13 @@ class Validate
         return $return;
     }
 
+    /**
+     * Fonction pour vérifier que le mot de passe et la confirmation sont alignés
+     *
+     * @param string $pwd
+     * @param string $pwdConfirm
+     * @return string
+     */
     public static function verifyConfirmPassword($pwd, $pwdConfirm)
     {
         $return = '';

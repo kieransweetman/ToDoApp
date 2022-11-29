@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.1.2
 -- https://www.phpmyadmin.net/
 --
--- Hôte : localhost:8889
--- Généré le : dim. 27 nov. 2022 à 15:24
--- Version du serveur :  5.7.34
--- Version de PHP : 8.0.8
+-- Host: localhost:3306
+-- Generation Time: Nov 29, 2022 at 11:17 AM
+-- Server version: 5.7.24
+-- PHP Version: 8.1.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `projetmcd`
+-- Database: `projetmcd`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `affectation`
+-- Table structure for table `affectation`
 --
 
 CREATE TABLE `affectation` (
@@ -34,7 +34,7 @@ CREATE TABLE `affectation` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Déchargement des données de la table `affectation`
+-- Dumping data for table `affectation`
 --
 
 INSERT INTO `affectation` (`id_projets`, `id_users`, `admin`) VALUES
@@ -73,7 +73,7 @@ INSERT INTO `affectation` (`id_projets`, `id_users`, `admin`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `projets`
+-- Table structure for table `projets`
 --
 
 CREATE TABLE `projets` (
@@ -82,7 +82,7 @@ CREATE TABLE `projets` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Déchargement des données de la table `projets`
+-- Dumping data for table `projets`
 --
 
 INSERT INTO `projets` (`id`, `libelle`) VALUES
@@ -96,7 +96,7 @@ INSERT INTO `projets` (`id`, `libelle`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `taches`
+-- Table structure for table `taches`
 --
 
 CREATE TABLE `taches` (
@@ -110,7 +110,7 @@ CREATE TABLE `taches` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Déchargement des données de la table `taches`
+-- Dumping data for table `taches`
 --
 
 INSERT INTO `taches` (`id`, `titre`, `priorite`, `statut`, `description`, `id_users`, `id_projets`) VALUES
@@ -136,7 +136,7 @@ INSERT INTO `taches` (`id`, `titre`, `priorite`, `statut`, `description`, `id_us
 -- --------------------------------------------------------
 
 --
--- Structure de la table `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -147,36 +147,36 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Déchargement des données de la table `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `pseudo`, `mail`, `pwd`) VALUES
-(1, 'gk', 'gk@gmail.fr', '123'),
-(2, 'ks', 'ks@gmail.fr', '123'),
-(3, 'ls', 'ls@gmail.fr', '123'),
-(4, 'cp', 'cp@gmail.fr', '123'),
-(5, 'er', 'er@gmail.fr', '123'),
-(6, 'cc', 'cc@gmail.fr', '123');
+(1, 'gk', 'gk@gmail.fr', '$2y$10$e2IwcYkzcsqE2cLjXshvheoA7gfy.n3V.InOPAwG7ScAc1x.9XN1a'),
+(2, 'ks', 'ks@gmail.fr', '$2y$10$O2aA3KTQDcQyh7kKwaGQBOxdQ.DLMvMR.SLZn9G/LjzAfcTga1pe2'),
+(3, 'ls', 'ls@gmail.fr', '$2y$10$vdptW6lxHk5yfAz79E4a6.VG1/WT5WX/EWCog5I2qJ0yxmCxDmdim'),
+(4, 'cp', 'cp@gmail.fr', '$2y$10$19xDuNVQT8MhjDE7MAlGr.IdXTnsSXGxmOygnTmHeF4945/ZKjqJq'),
+(5, 'er', 'er@gmail.fr', '$2y$10$TiSIrtE3S4G6BhWJsdrsVe94JFDbEfIjrkSQPMxqjMSpm9uuMKbPS'),
+(6, 'cc', 'cc@gmail.fr', '$2y$10$jHc0dA0uIb9hQddf30vQLOclmMlRn2snKSTTP19FsYBPYRuuAWGym');
 
 --
--- Index pour les tables déchargées
+-- Indexes for dumped tables
 --
 
 --
--- Index pour la table `affectation`
+-- Indexes for table `affectation`
 --
 ALTER TABLE `affectation`
   ADD KEY `fk_affectation_projets` (`id_projets`),
   ADD KEY `fk_affectation_users` (`id_users`);
 
 --
--- Index pour la table `projets`
+-- Indexes for table `projets`
 --
 ALTER TABLE `projets`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `taches`
+-- Indexes for table `taches`
 --
 ALTER TABLE `taches`
   ADD PRIMARY KEY (`id`),
@@ -184,46 +184,46 @@ ALTER TABLE `taches`
   ADD KEY `fk_taches_users` (`id_users`);
 
 --
--- Index pour la table `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT pour les tables déchargées
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT pour la table `projets`
+-- AUTO_INCREMENT for table `projets`
 --
 ALTER TABLE `projets`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT pour la table `taches`
+-- AUTO_INCREMENT for table `taches`
 --
 ALTER TABLE `taches`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
--- AUTO_INCREMENT pour la table `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
--- Contraintes pour les tables déchargées
+-- Constraints for dumped tables
 --
 
 --
--- Contraintes pour la table `affectation`
+-- Constraints for table `affectation`
 --
 ALTER TABLE `affectation`
   ADD CONSTRAINT `fk_affectation_projets` FOREIGN KEY (`id_projets`) REFERENCES `projets` (`id`),
   ADD CONSTRAINT `fk_affectation_users` FOREIGN KEY (`id_users`) REFERENCES `users` (`id`);
 
 --
--- Contraintes pour la table `taches`
+-- Constraints for table `taches`
 --
 ALTER TABLE `taches`
   ADD CONSTRAINT `fk_taches_projets` FOREIGN KEY (`id_projets`) REFERENCES `projets` (`id`),

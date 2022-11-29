@@ -32,16 +32,5 @@ class Security
             $_SESSION['pseudo'] = $_POST['pseudo'];
             $_SESSION['id'] = $searchUser[0]->getId();
         }
-
-        // Gestion login password initiaux sans hash
-        if (
-            $pseudo === $searchUser[0]->getPseudo() &&
-            $_POST['pwd'] === $searchUser[0]->getPwd()
-        ) {
-            session_start();
-            $_SESSION['connected'] = true;
-            $_SESSION['pseudo'] = $_POST['pseudo'];
-            $_SESSION['id'] = $searchUser[0]->getId();
-        }
     }
 }
