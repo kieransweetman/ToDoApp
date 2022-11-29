@@ -19,9 +19,6 @@ class TachesController
             $projet = $data[1];
             var_dump($_POST['submit']);
             return;
-        } else {
-            $this->createTache();
-            return;
         }
 
         if (isset($_POST['submit'])) {
