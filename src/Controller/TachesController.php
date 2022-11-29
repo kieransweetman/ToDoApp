@@ -13,8 +13,41 @@ class TachesController
 {
     public function __construct()
     {
+        if (isset($_GET['insert'])) {
+            $this->createTache();
+            $data = explode("/", $_GET['insert']);
+            $projet = $data[1];
+            var_dump($_POST['submit']);
+        }
+
+        if (isset($_POST['submit'])) {
+            $this->changeStatut();
+        }
         $this->AffichesTaches();
     }
+
+    private function changeStatut()
+    {
+        if (isset($_POST['statut'])) {
+            $selected = $_POST['statut'];
+            $selected = explode("/", $selected);
+            Taches::updateAttributeById('statut', $selected[0], $selected[1]);
+        }
+    }
+
+    public function createTache($projet_id = null)
+    {
+        $view = new Views('CreateUpdateTaches', 'Creez un Tache');
+        if (Security::isConnected()) {
+            $view->setVar('connected', true);
+        } else {
+            header('location: index.php');
+        }
+        $view->render();
+        // Taches::create();
+        // 'insert into "table" values(NULL, titre, priorite, statut, description, id_users, id_projets) ';
+    }
+
 
     private function AffichesTaches()
     {
