@@ -12,8 +12,11 @@ class UserController
 {
     public function __construct()
     {
-        
-        $this->createUser();
+        if (isset($_GET['update'])) {
+            $this->UpdateUser();
+        } else {
+            $this->createUser();
+        }
     }
 
     // Fonction pour créer un utilisateur
@@ -26,6 +29,7 @@ class UserController
         } else {
             $view->setVar('connected', false);
         }
+        //Traitement du formulaire pour créer un compte
         if (isset($_POST['submit'])) {
             if (($message = $this->isValid()) === '') {
                 unset($_POST['submit']);
@@ -40,36 +44,38 @@ class UserController
             $view->setVar('pseudo', $_POST['pseudo']);
             $view->setVar('mail', $_POST['mail']);
         }
-
         $view->render();
-        // $view->setVar('pseudo', $_SESSION['pseudo']);
-            //User::getbyid($_SESSION['id]->getmail)
     }
 
     // Fonction pour modifier le User
-    public function UpdateEleve() {
-        $view = new Views('CreateUpdateCompte','Modifier mon compte');
+    public function UpdateUser()
+    {
+        $view = new Views('CreateUpdateCompte', 'Modification d\'un utilisateur');
+        $view->setVar('TitrePage', 'Modifier mon compte');
         if (Security::isConnected()) {
             $view->setVar('connected', true);
+            $user = Users::getById($_GET['update']);
+            $view->setVar('pseudo', $user[0]->getPseudo());
+            $view->setVar('mail', $user[0]->getMail());
         } else {
             header('location: index.php');
         }
-        $view->setVar('action','&update='.$_GET['update']);
-        if (isset($_POST['create'])) {
-            if (($message=$this->isValid()) === '') {
+        //Traitement du formulaire pour modifier un compte
+        if (isset($_POST['modify'])) {
+            if (($message = $this->isValid()) === '') {
                 if (Users::updateById()) {
-                    $view->setVar('message', 'L\'élève a bien été mis à jour');
-                } else {
-                    $view->setVar('message', 'Une erreur est survenue');
+                    $view->setVar('message', 'Le compte a bien été mis à jour');
                 }
             } else {
-                $view->setVar('message',$message);
+                $view->setVar('message', $message);
             }
+            $view->setVar('pseudo', $_POST['pseudo']);
+            $view->setVar('mail', $_POST['mail']);
         }
-        
+        $view->render();
     }
 
-    // Fonction pour vérifier les entrées du formulaire
+    // Fonction pour vérifier les entrées du formulaire User
     private function isValid()
     {
         $return = '';
