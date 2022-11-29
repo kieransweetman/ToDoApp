@@ -7,7 +7,7 @@ class Validate
     public static function ValidatePseudo($pseudo, $message)
     {
         $return = '';
-        $pattern = "/^([a-zA-Z0-9' -]+)$/";
+        $pattern = "/^([a-zA-Z0-9' àâçéèêëîïôûùüÿñæœ -]+)$/";
         if (!preg_match($pattern, $pseudo)) {
             $return = $message;
         }
