@@ -76,7 +76,7 @@ class ProjetController {
         if (isset($_POST['create'])) {
             if(($message=$this->isValid()) === ''){
                 if(Projets::create()) {
-                    Projets::getLastId();
+                    Affectation::createAffectation(Projets::getLastId());
                     $view->setVar('message','Un projet a bien été créé');
                 } else {
                     $view->setVar('message', 'Une erreur est survenue!');
