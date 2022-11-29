@@ -1,8 +1,10 @@
-<h1>Create/ Update tache</h1>
-
 <div>
+    <?php
+
+    ?>
     <form action="" method="POST">
-        <h2><?php echo $projet_id; ?></h2>
+
+        <h3><?php echo   $projet->getLibelle(); ?></h3>
         <div>
             <label for="titre">Nom de la tâche:</label>
             <input type="text" id="titre" name="titre">
@@ -22,24 +24,37 @@
                 <option value="Terminé">Terminé</option>
             </select>
         </div>
-
-        <div>
-            <label for="user">Affectation:</label>
-            <select name="user" id="user">
-                <option>
-                <option value="Kiki">Kiki</option>
-
-                </option>
-            </select>
-        </div>
-
         <div>
             <label for="description">Description:</label>
             <input type="text" id="description" name="description">
         </div>
+        <div>
+            <label for="user">Affectation:</label>
+            <select name="id_users" id="user">
+                <?php
+                foreach ($users as $user) {
+
+                ?>
+
+                    <option value=<?php echo "'" . $user->getId() . "'"; ?>> <?php echo $user->getPseudo(); ?></option>
+
+                <?php
+                }
+                ?>
+
+
+
+
+            </select>
+        </div>
+
+        <div style="display:none;">
+            <label for="id_projets">projet id:</label>
+            <input type="text" value="<?php echo $projet_id ?>" name='id_projets'>
+        </div>
 
         <div>
-            <input type="submit" value="valider" name='submit'>
+            <input type="submit" value="valider" name='create'>
         </div>
     </form>
 </div>

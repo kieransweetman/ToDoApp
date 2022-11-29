@@ -89,8 +89,7 @@ class Model
     public static function create()
     {
         $vars = self::clear();
-        $sql = 'insert into ' . self::getClass() . " values(" . $vars[1] . ")";
-        echo $sql;
+        $sql = 'insert into ' . self::getClass() . " values(" . $vars[0] . ")";
         return self::getInstance()->prepare($sql)->execute($vars[1]);
     }
 
@@ -125,7 +124,14 @@ class Model
         );
         return $query->fetchAll(\PDO::FETCH_CLASS, get_called_class());
     }
-
+    /**
+     * update enrigstrement par l'id 
+     *
+     * @param string $col
+     * @param string $value
+     * @param int $id
+     * @return void
+     */
     public static function updateAttributeById($col, $value, $id)
     {
         $sql = 'update ' . \strtolower(self::getClass()) . ' set ' . $col . " = '" . $value . "' where id=" . $id;
@@ -135,7 +141,8 @@ class Model
 
     private static function clear()
     {
-        unset($_POST['valider']);
+
+        unset($_POST['create']);
 
         $return[] = ':id';
         if (isset($_GET['insert'])) {
@@ -146,7 +153,7 @@ class Model
             $return[0] .= ',:' . $key;
             $return[1][$key] = htmlspecialchars($value);
         }
-        var_dump($return);
+
         return $return;
     }
 }
