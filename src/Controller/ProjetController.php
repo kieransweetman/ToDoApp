@@ -3,6 +3,7 @@
 namespace Digi\Todoapp\Controller;
 
 use Digi\Todoapp\Core\Security;
+use Digi\Todoapp\Core\Validate;
 use Digi\Todoapp\Core\Views;
 use Digi\Todoapp\Model\Affectation;
 use Digi\Todoapp\Model\Projets;
@@ -25,6 +26,9 @@ class ProjetController {
             }
             $this->AfficheProjets();
         }
+        if (isset($_GET['insert'])) {
+            $this->CreateProjet();
+        }
         else{
             $this->AfficheProjets();
         }
@@ -43,7 +47,7 @@ class ProjetController {
         //On va cherchez les projets, les tâches, les users et les affectations de la base de données
         $projets = Projets::getAllOrderBy('id');
         $taches = Taches::getAllOrderBy('priorite');
-        $users = Users::getAll();
+        $users = Users::getAll();//Voir pour sortir que l'utilisateur de la session
         $affectations = Affectation::getAll();
         //On assigne nos résultats au tableau de setVar pour les récupérer sur la vue
         $view->setVar('projets',$projets);
@@ -54,4 +58,46 @@ class ProjetController {
         //On crée et on affiche la page
         $view->render();
     }
+
+    //Page de création de projet
+    public function CreateProjet(){
+        //Création de la vue
+        $view = new Views('CreateUpdateProjets','Création d\'un projet');
+        //Vérification et maintien de la session, sinon retour à l'accueil
+        if (Security::isConnected()) {
+            $view->setVar('connected', true);
+        } else {
+            header('location: index.php');
+        }
+        //Ajout de variables au tableau setVar pour les récupérer sur la View
+        $view->setVar('TitrePage', 'Création de projet');
+        $view->setVar('action','&insert=projet');
+        $view->setVar('submit', 'Créer projet');
+        if (isset($_POST['create'])) {
+            if(($message=$this->isValid()) === ''){
+                if(Projets::create()) {
+                    Projets::getLastId();
+                    $view->setVar('message','Un projet a bien été créé');
+                } else {
+                    $view->setVar('message', 'Une erreur est survenue!');
+                }
+            }
+            else{
+                $view->setVar('message',$message);
+            }
+            $view->setVar('libelle',$_POST['libelle']);
+        }
+        $view->render();
+    }
+
+    //Test de validation pour éviter les doublons de libellé
+    private function isValid(){
+        $return ='';
+        $projets = Projets::getByAttribute('libelle',$_POST['libelle']);
+        if(count($projets)>0){
+            $return = "Le libellé de ce projet existe déjà";
+        }
+        return $return;
+    }
+
 }
