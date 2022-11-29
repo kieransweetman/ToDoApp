@@ -1,5 +1,4 @@
 <?php
-var_dump($_POST);
 echo "<a href='index.php?page=".$_GET['page']."&insert=projet'>Créer un nouveau projet</a>";
 echo '<h2>Liste de mes projets</h2>';
 

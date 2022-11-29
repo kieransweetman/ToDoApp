@@ -80,9 +80,9 @@ class Model
      * @param string $attribut => Valeur de la colonne
      * @return void
      */
-    public static function deleteByAttribute($name, $attribut)
+    public static function deleteByAttribute($name, $value)
     {
-        $sql = 'delete from ' . self::getClass() . ' where '.$name.'=' . $attribut;
+        $sql = 'delete from ' . self::getClass() . ' where '.$name.'=' . $value;
         $query = self::getInstance()->exec($sql);
     }
 
