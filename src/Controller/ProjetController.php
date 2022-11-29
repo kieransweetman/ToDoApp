@@ -13,7 +13,21 @@ class ProjetController {
 
     //Constructeur de la page ProjetController
     public function __construct(){
-        $this->AfficheProjets();
+        if (isset($_GET['delete'])) {
+            if(isset($_POST['oui'])){
+                Taches::deleteByAttribute('id_projets',$_GET['delete']);
+                Affectation::deleteByAttribute('id_projets',$_GET['delete']);
+                Projets::deleteById((int)$_GET['delete']);
+            }
+            if(isset($_POST['non'])){
+                //Pour recharger la page en cours et faire disparaître le form de l'affichage
+                header('location: index.php?page=afficheprojets');
+            }
+            $this->AfficheProjets();
+        }
+        else{
+            $this->AfficheProjets();
+        }
     }
 
     //Page d'affichage de mes projets
@@ -26,13 +40,10 @@ class ProjetController {
         } else {
             header('location: index.php');
         }
-        //On va cherchez les projets de la base de données par id
+        //On va cherchez les projets, les tâches, les users et les affectations de la base de données
         $projets = Projets::getAllOrderBy('id');
-        //On va cherchez les tâches de la base de données par priorité
         $taches = Taches::getAllOrderBy('priorite');
-        //On va cherchez les utilisateurs de la base de données
         $users = Users::getAll();
-        //On va cherchez les affectations de la base de données
         $affectations = Affectation::getAll();
         //On assigne nos résultats au tableau de setVar pour les récupérer sur la vue
         $view->setVar('projets',$projets);
