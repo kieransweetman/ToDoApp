@@ -71,13 +71,11 @@ class TachesController
 
     private function changeStatut()
     {
-        var_dump($_POST);
 
         if (isset($_POST['statut'])) {
             $selected = $_POST['statut'];
 
             $selected = explode('/', $selected);
-            echo $selected[1];
 
             Taches::updateAttributeById('statut', $selected[0], $selected[1]);
         }

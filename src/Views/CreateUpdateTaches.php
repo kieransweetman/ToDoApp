@@ -56,8 +56,8 @@
             <div>
                 <label for="user">Affectation:</label>
                 <select name="id_users" id="user">
-                    <?php foreach ($users as $user) { ?>
-
+                    <?php foreach ($users as $user) {var_dump($user); ?>
+                        
                         <option value=<?php
                         echo "'" . $user->getId() . "'";
                         if (
