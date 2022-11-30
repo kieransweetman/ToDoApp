@@ -140,6 +140,13 @@ class ProjetController
         } else {
             $view->setVar('message1', $message1);
         }
+        //Supression de l'affectation d'un utlisateur
+        if(isset($_GET['deleteuser'])){
+            $user = Users::getByAttribute('pseudo', $_GET['deleteuser']);
+            $id_user = $user[0]->getId();
+            Affectation::deleteByTwoAttributes('id_users', $id_user, 'id_projets', $_GET['update'] );
+            header('location: index.php?page=afficheprojets&update='.$_GET['update']);
+        }
         $view->render();
     }
 
