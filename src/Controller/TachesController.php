@@ -13,15 +13,13 @@ class TachesController
 {
     public function __construct()
     {
-
         if ($_GET['page'] === 'CreateUpdateTache') {
 
             if (isset($_GET['insert'])) {
-                $data = explode("/", $_GET['insert']);
+                $data = explode('/', $_GET['insert']);
                 $projet = $data[1];
                 $this->createTache($projet);
             }
-
             if (isset($_POST['create'])) {
                 Taches::create();
             }
@@ -32,7 +30,7 @@ class TachesController
 
                 if (isset($_POST['update'])) {
                     $idTache = $_GET['update'];
-                    // 1. cherchez tout les taches d'un projet 
+                    // 1. cherchez tout les taches d'un projet
                     // 2. les ordonnee par priorite
                     // 3. un algo avec le priorite change, qui boucle sur la liste des taches, et change la priorite
                     Taches::updateById();
@@ -48,7 +46,6 @@ class TachesController
         }
 
         if ($_GET['page'] === 'affichetaches') {
-
             if (isset($_POST['submit'])) {
                 $this->changeStatut();
                 $this->AffichesTaches();
@@ -69,16 +66,18 @@ class TachesController
             header('refresh:0; url=index.php?page=afficheprojets');
         }
         if (isset($_POST['non'])) {
-
             header('location: index.php?page=afficheprojets');
         }
     }
 
     private function changeStatut()
     {
+
         if (isset($_POST['statut'])) {
             $selected = $_POST['statut'];
-            $selected = explode("/", $selected);
+
+            $selected = explode('/', $selected);
+
             Taches::updateAttributeById('statut', $selected[0], $selected[1]);
         }
     }
@@ -100,7 +99,6 @@ class TachesController
             header('location: index.php');
         }
 
-
         $tache = Taches::getByAttribute('id', $idTache);
         $projet = Projets::getByAttribute('id', $tache[0]->id_projets);
         $users = Affectation::getByAttribute('id_projets', $tache[0]->id_projets);
@@ -109,7 +107,7 @@ class TachesController
         // genere un tableau avec tout les users affecté sur un projet 
         $return = [];
 
-        foreach ($users as $user) {
+        foreach ($users[0] as $user) {
             $user = Users::getById($user->getId_users());
             $return[] = $user[0];
         }
@@ -117,7 +115,7 @@ class TachesController
         // variables
 
         $view->setVar('tache', $tache[0]);
-        $view->setVar('TitrePage', "Update un tache");
+        $view->setVar('TitrePage', 'Update un tache');
         $view->setVar('users', $return);
         $view->setVar('projet', $projet[0]);
         $view->render();
@@ -139,19 +137,18 @@ class TachesController
         //  genere un tableau avec tout les users affecté sur un projet 
         $return = [];
 
-        foreach ($users as $user) {
+        foreach ($users[0] as $user) {
             $user = Users::getById($user->getId_users());
             $return[] = $user[0];
         }
         // variables
 
-        $view->setVar('TitrePage', "Creez un Tache");
-        $view->setVar("projet_id", $projet_id);
+        $view->setVar('TitrePage', 'Creez un Tache');
+        $view->setVar('projet_id', $projet_id);
         $view->setVar('users', $return);
         $view->setVar('projet', $projet[0]);
         $view->render();
     }
-
 
     private function AffichesTaches()
     {
@@ -163,17 +160,15 @@ class TachesController
             header('location: index.php');
         }
 
-
         $user = $_SESSION['id'];
         $projets = Projets::getAllOrderBy('id');
         $taches = Taches::getAllOrderBy('priorite');
-        $affectiations = Affectation::getByAttribute('id_users', $user);
-
+        $affectations = Affectation::getByAttribute('id_users', $user);
 
         // variables
-        $view->setVar("TitrePage", "Mes Taches");
+        $view->setVar('TitrePage', 'Mes Taches');
         $view->setVar('user', $user);
-        $view->setVar('affectations', $affectiations);
+        $view->setVar('affectations', $affectations);
         $view->setVar('taches', $taches);
         $view->setVar('projets', $projets);
         $view->render();

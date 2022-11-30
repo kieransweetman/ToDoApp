@@ -1,21 +1,25 @@
-<?php if (isset($_GET['update']) || isset($_GET['delete'])) {
+<?php if (isset($_GET['update']) || isset($_GET['delete'])) { ?>
 
 
     // Mettre a jour un Tache
-?>
+
     <main>
         <form action="" method="POST">
 
-            <h3><?php echo   $projet->getLibelle(); ?></h3>
+            <h3><?php echo $projet->getLibelle(); ?></h3>
 
             <div>
                 <label for="titre">Nom de la tâche:</label>
-                <input type="text" id="titre" name="titre" value=<?php echo "'" . $tache->getTitre() . "'" ?>>
+                <input type="text" id="titre" name="titre" value=<?php echo "'" .
+                    $tache->getTitre() .
+                    "'"; ?>>
             </div>
 
             <div>
                 <label for="priorite">Priorité:</label>
-                <input type="text" id="priorite" name="priorite" value=<?php echo "'" . $tache->getPriorite() . "'" ?>>
+                <input type="text" id="priorite" name="priorite" value=<?php echo "'" .
+                    $tache->getPriorite() .
+                    "'"; ?>>
             </div>
 
             <div>
@@ -25,33 +29,43 @@
 
 
                     <option value="">Statut</option>
-                    <option value="Non Débuté" <?php if ($tache->getStatut() === 'Non Débuté') : echo 'selected';
-                                                endif; ?>>Non débuté </option>
-                    <option value="En Cours" <?php if ($tache->getStatut() === 'En cours') : echo 'selected';
-                                                endif; ?>>En cours</option>
+                    <option value="Non Débuté" <?php if (
+                        $tache->getStatut() === 'Non Débuté'
+                    ):
+                        echo 'selected';
+                    endif; ?>>Non débuté </option>
+                    <option value="En Cours" <?php if (
+                        $tache->getStatut() === 'En cours'
+                    ):
+                        echo 'selected';
+                    endif; ?>>En cours</option>
 
-                    <option value="Terminé" <?php if ($tache->getStatut() === 'Terminé') : echo 'selected';
-                                            endif; ?>>Terminé</option>
+                    <option value="Terminé" <?php if (
+                        $tache->getStatut() === 'Terminé'
+                    ):
+                        echo 'selected';
+                    endif; ?>>Terminé</option>
                 </select>
             </div>
             <div>
                 <label for="description">Description:</label>
-                <input type="text" id="description" name="description" value=<?php echo "'" . $tache->getDescription() . "'" ?>>
+                <input type="text" id="description" name="description" value=<?php echo "'" .
+                    $tache->getDescription() .
+                    "'"; ?>>
             </div>
             <div>
                 <label for="user">Affectation:</label>
                 <select name="id_users" id="user">
-                    <?php
-                    foreach ($users as $user) {
+                    <?php foreach ($users as $user) {var_dump($user); ?>
+                        
+                        <option value=<?php
+                        echo "'" . $user->getId() . "'";
+                        if (
+                            $user->getId() === $tache->id_users
+                        ): ?> selected <?php endif;
+                        ?>> <?php echo $user->getPseudo(); ?></option>
 
-                    ?>
-
-                        <option value=<?php echo "'" . $user->getId() . "'";
-                                        if ($user->getId() === $tache->id_users) : ?> selected <?php endif; ?>> <?php echo $user->getPseudo(); ?></option>
-
-                    <?php
-                    }
-                    ?>
+                    <?php } ?>
 
 
 
@@ -65,31 +79,32 @@
             </div>
 
             <div>
-                <input type="submit" value="valider" name='update' <?php if (isset($_GET['delete'])) : echo "style='display:none;'";
-                                                                    endif; ?>>
+                <input type="submit" value="valider" name='update' <?php if (
+                    isset($_GET['delete'])
+                ):
+                    echo "style='display:none;'";
+                endif; ?>>
             </div>
         </form>
 
-        <?php
-
-        if (isset($_GET['delete']) && $_GET['delete'] == $tache->getId()) {
-            echo "Êtes-vous certain(e) de vouloir effectuer la suppression? Le tache et toutes les données qui lui sont reliées seront supprimées";
+        <?php if (
+            isset($_GET['delete']) &&
+            $_GET['delete'] == $tache->getId()
+        ) {
+            echo 'Êtes-vous certain(e) de vouloir effectuer la suppression? Le tache et toutes les données qui lui sont reliées seront supprimées';
             echo "<form method='POST'><input type='submit' name='oui' value ='Oui''><input type='submit' name='non' value ='Non''></form>";
-        }
-
-        ?>
+        } ?>
     </main>
 
 <?php }
 
 // Creez nouveau tache
 
-if (isset($_GET['insert'])) {
-?>
+if (isset($_GET['insert'])) { ?>
     <main>
         <form action="" method="POST">
 
-            <h3><?php echo   $projet->getLibelle(); ?></h3>
+            <h3><?php echo $projet->getLibelle(); ?></h3>
             <div>
                 <label for="titre">Nom de la tâche:</label>
                 <input type="text" id="titre" name="titre" value=''>
@@ -120,16 +135,13 @@ if (isset($_GET['insert'])) {
             <div>
                 <label for="user">Affectation:</label>
                 <select name="id_users" id="user">
-                    <?php
-                    foreach ($users as $user) {
+                    <?php foreach ($users as $user) { ?>
 
-                    ?>
+                        <option value=<?php echo "'" .
+                            $user->getId() .
+                            "'"; ?>> <?php echo $user->getPseudo(); ?></option>
 
-                        <option value=<?php echo "'" . $user->getId() . "'"; ?>> <?php echo $user->getPseudo(); ?></option>
-
-                    <?php
-                    }
-                    ?>
+                    <?php } ?>
 
 
 
@@ -149,6 +161,5 @@ if (isset($_GET['insert'])) {
     </main>
 
 
-<?php
-}
+<?php }
 ?>
