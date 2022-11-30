@@ -13,6 +13,7 @@ class TachesController
 {
     public function __construct()
     {
+
         if ($_GET['page'] === 'CreateUpdateTache') {
             if (isset($_GET['insert'])) {
                 $data = explode("/", $_GET['insert']);
@@ -23,14 +24,22 @@ class TachesController
 
                 Taches::create();
             }
-
             if (isset($_GET['update'])) {
-                $projet = substr($_GET['update'], -1);
+                $idTache = $_GET['update'];
+                $this->updateTache($idTache);
 
-
-                $this->updateTache($projet);
+                if (isset($_POST['update'])) {
+                    $idTache = $_GET['update'];
+                    Taches::updateById();
+                    return  header("Refresh:0; url=index.php?page=CreateUpdateTache&update=$idTache");
+                }
+            }
+            if (isset($_GET['delete'])) {
+                $idTache = $_GET['delete'];
+                $this->delTache($idTache);
             }
         }
+
         if ($_GET['page'] === 'affichetaches') {
 
             if (isset($_POST['submit'])) {
@@ -44,6 +53,20 @@ class TachesController
         }
     }
 
+    private function delTache($idTache = null)
+    {
+        $this->updateTache($idTache);
+
+        if (isset($_POST['oui'])) {
+            Taches::deleteById($_GET['delete']);
+            header('refresh:0; url=index.php?page=afficheprojets');
+        }
+        if (isset($_POST['non'])) {
+
+            header('location: index.php?page=afficheprojets');
+        }
+    }
+
     private function changeStatut()
     {
         if (isset($_POST['statut'])) {
@@ -53,22 +76,25 @@ class TachesController
         }
     }
 
-    private function updateTache($projet_id = null)
+    private function updateTache($idTache = null)
     {
         $view = new Views('CreateUpdateTaches', 'Update Tache');
+        $idTache = intVal($idTache);
+
         if (Security::isConnected()) {
             $view->setVar('connected', true);
         } else {
             header('location: index.php');
         }
-        $view->setVar("projet_id", $projet_id);
-        if ($projet_id != null) {
-            $projet_id = intval($projet_id);
-        }
-        $projet = Projets::getByAttribute('id', $projet_id);
 
-        $view->setVar('TitrePage', "Update un tache");
-        $users = Affectation::getByAttribute('id_projets', $projet_id);
+
+        $tache = Taches::getByAttribute('id', $idTache);
+        $projet = Projets::getByAttribute('id', $tache[0]->id_projets);
+
+        // $view->setVar("projet", $projet);
+
+
+        $users = Affectation::getByAttribute('id_projets', $tache[0]->id_projets);
         $return = [];
 
         foreach ($users as $user) {
@@ -76,6 +102,9 @@ class TachesController
             $return[] = $user[0];
         }
 
+
+        $view->setVar('tache', $tache[0]);
+        $view->setVar('TitrePage', "Update un tache");
         $view->setVar('users', $return);
         $view->setVar('projet', $projet[0]);
         $view->render();
@@ -84,23 +113,27 @@ class TachesController
     private function createTache($projet_id = null)
     {
         $view = new Views('CreateUpdateTaches', 'Creez un Tache');
+
         if (Security::isConnected()) {
             $view->setVar('connected', true);
         } else {
             header('location: index.php');
         }
-        $view->setVar("projet_id", $projet_id);
 
         $projet = Projets::getByAttribute('id', $projet_id);
-        $view->setVar('TitrePage', "Creez un Tache");
         $users = Affectation::getByAttribute('id_projets', $projet_id);
+
+        //retourne la liste des users qui sont affecté au projet
         $return = [];
 
         foreach ($users as $user) {
             $user = Users::getById($user->getId_users());
             $return[] = $user[0];
         }
+        // variables
 
+        $view->setVar('TitrePage', "Creez un Tache");
+        $view->setVar("projet_id", $projet_id);
         $view->setVar('users', $return);
         $view->setVar('projet', $projet[0]);
         $view->render();
@@ -110,7 +143,6 @@ class TachesController
     private function AffichesTaches()
     {
         $view = new Views('AfficheTaches', 'Mes Taches');
-        $view->setVar("TitrePage", "Mes Taches");
 
         if (Security::isConnected()) {
             $view->setVar('connected', true);
@@ -119,13 +151,16 @@ class TachesController
         }
 
 
+        $user = $_SESSION['id'];
         $projets = Projets::getAllOrderBy('id');
         $taches = Taches::getAllOrderBy('priorite');
-        $user = $_SESSION['id'];
-        $projs = Affectation::getByAttribute('id_users', $user);
+        $affectiations = Affectation::getByAttribute('id_users', $user);
 
+
+        // variables
+        $view->setVar("TitrePage", "Mes Taches");
         $view->setVar('user', $user);
-        $view->setVar('projs', $projs);
+        $view->setVar('affectations', $affectiations);
         $view->setVar('taches', $taches);
         $view->setVar('projets', $projets);
         $view->render();

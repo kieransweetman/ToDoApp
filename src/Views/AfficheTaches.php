@@ -1,7 +1,5 @@
 <?php
-// echo "<pre>";
-// var_dump($projets);
-// echo "</pre>"
+
 ?>
 
 
@@ -9,19 +7,30 @@
 <main>
     <?php
 
-    foreach ($projs as $proj) {
+    foreach ($affectations as $affectation) {
+        $temp = null;
+        $count = 1;
         foreach ($projets as $projet) {
 
-            if ($user === $proj->getId_user() && $proj->getId_projets() === $projet->getId()) {
-                foreach ($taches as $tache) {
-                    if ($tache->id_projets === $projet->getId() && $tache->id_users === $user) :
+            if ($user === $affectation->getId_user() && $affectation->getId_projets() === $projet->getId()) {
 
-    ?>
-                        <hr style="width: 100vw; color:black;">
+                foreach ($taches as $tache) {
+                    if ($tache->id_projets === $projet->getId() && $tache->id_users === $user) { ?>
+                        <?php if ($projet->getId() === $temp) { ?>
+
+                            <hr style="width: 100vw; color:black;">
+                        <?php $count++;
+                        } else {
+                        ?>
+                            <h3><?php echo " " . $projet->getLibelle(); ?></h3>
+                            <hr style="width: 100vw; color:black;">
+
+                        <?php $temp = $projet->getId();
+                        }
+                        ?>
+
                         <section class="projet_<?php echo $projet->getId(); ?>">
-                            <h3><?php
-                                echo $projet->getLibelle();
-                                ?></h3>
+
 
 
                             <div class="tache_<?php echo $tache->getId() ?>">
@@ -29,7 +38,7 @@
 
                                     <div style="display:flex; gap:16px;">
 
-                                        <p><?php echo $tache->getTitre(); ?></p>
+                                        <p><?php echo "Tache " . $count . " : " . $tache->getTitre(); ?></p>
                                         <p>priorit <?php echo $tache->getPriorite(); ?></p>
                                         <label for="statut" style="margin: 16px 0px;"></label>
                                         <select name="statut" id="statut" style="height:50%; margin: 16px 0px;">
@@ -51,7 +60,7 @@
 
                                 </form>
                             </div>
-                        <?php endif; ?>
+                        <?php }; ?>
 
 
 
