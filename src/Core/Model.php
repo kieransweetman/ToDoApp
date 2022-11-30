@@ -67,6 +67,19 @@ class Model
         return $query->fetchAll(\PDO::FETCH_CLASS, get_called_class());
     }
 
+    /**
+     * retourne le dernier id créé de la table
+     *
+     * @return void
+     */
+    public static function getLastId(){
+        $query = self::getInstance()->query(
+            'select max(id) from ' . self::getClass()
+        );
+        $result = $query->fetchAll(\PDO::FETCH_CLASS, get_called_class());
+        return $result[0]->{"max(id)"};
+    }
+
     public static function deleteById($id)
     {
         $sql = 'delete from ' . self::getClass() . ' where id=' . $id;
