@@ -112,7 +112,8 @@ class Model
 
     public static function updateById()
     {
-        $sql = 'update ' . self::getClass() . ' set ';
+        unset($_POST['update']);
+        $sql = 'update ' . \strtolower(self::getClass()) . ' set ';
         foreach ($_POST as $key => $value) {
             if ($key === 'create') {
                 continue;

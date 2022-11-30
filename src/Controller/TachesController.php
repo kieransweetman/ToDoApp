@@ -29,13 +29,11 @@ class TachesController
                 $this->updateTache($idTache);
 
                 if (isset($_POST['update'])) {
-                    $idTache = $_GET['update'];
                     // 1. cherchez tout les taches d'un projet
                     // 2. les ordonnee par priorite
                     // 3. un algo avec le priorite change, qui boucle sur la liste des taches, et change la priorite
                     Taches::updateById();
-
-                    return  header("Refresh:0; url=index.php?page=afficheprojets");
+                    return  header("location: index.php?page=afficheprojets");
                 }
             }
 

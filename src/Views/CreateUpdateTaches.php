@@ -58,7 +58,7 @@
                     <?php foreach ($users as $user) { ?>
                         <option value=<?php echo "'" .
                                             $user->getId() .
-                                            "'"; ?>> <?php echo $user->getPseudo(); ?></option>
+                                            "'"; echo ($user->getId() === $tache->id_users) ? 'selected': "" ;?> > <?php echo $user->getPseudo(); ?></option>
                         
                     <?php } ?>
 
