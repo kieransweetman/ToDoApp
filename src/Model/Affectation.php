@@ -20,7 +20,7 @@ class Affectation extends Model
     private static function clearAffectation($id_projet, $id_users, $isadmin)
     {
         $return[] = ':id_projets,:id_users,:admin';
-        if (isset($_GET['insert'])) {
+        if (isset($_GET['insert']) || isset($_GET['update'])) {
             $return[1]['id_projets'] = $id_projet;
             $return[1]['id_users'] = $id_users;
             $return[1]['admin'] = $isadmin;

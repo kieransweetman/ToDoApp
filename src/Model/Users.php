@@ -18,7 +18,6 @@ class Users extends Model{
         }
         $where = substr($where,0,strlen($where)-1);
         $query = self::getInstance()->query('select distinct pseudo from users join affectation on id_users=id where id in(' . $where . ') and admin=0 and id_projets='. $_GET['update']);
-        var_dump($query);
         return $query->fetchAll(\PDO::FETCH_CLASS, get_called_class());
     }
 

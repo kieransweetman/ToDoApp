@@ -9,7 +9,6 @@
 </p>
 
 
-<!-- Rajouter balise de connection  -->
 
 
 <?php if ($connected != true) : ?>
