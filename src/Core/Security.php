@@ -26,7 +26,7 @@ class Security
         $searchUser = Users::getByAttribute('pseudo', $pseudo);
 
         if(!$searchUser){
-            $message = "ce compte n'existe pas/ Ou vous n'avez pas saisie vos identifiants correctement";
+            $message = "Ce compte n'existe pas/ Ou vous n'avez pas saisie vos identifiants correctement";
             return $message;
         }
 

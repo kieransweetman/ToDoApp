@@ -12,7 +12,7 @@
 
 
 <?php if ($connected != true) : ?>
-    <p><?php echo $message;  ?></p>
+    <p><?php echo isset($message) ? $message : "";  ?></p>
     <form method='POST' action='index.php'>
         <input name='pseudo' type='text' placeholder='Pseudo'>
         <input name='pwd' type='password' placeholder="Votre mot de passe">

@@ -34,10 +34,10 @@
                                                     echo 'selected';
                                                 endif; ?>>Non débuté </option>
                     <option value="En Cours" <?php if (
-                                                    $tache->getStatut() === 'En cours'
+                                                    $tache->getStatut() === 'En Cours'
                                                 ) :
                                                     echo 'selected';
-                                                endif; ?>>En cours</option>
+                                                endif; ?>>En Cours</option>
 
                     <option value="Terminé" <?php if (
                                                 $tache->getStatut() === 'Terminé'
