@@ -13,15 +13,13 @@ class TachesController
 {
     public function __construct()
     {
-
         if ($_GET['page'] === 'CreateUpdateTache') {
             if (isset($_GET['insert'])) {
-                $data = explode("/", $_GET['insert']);
+                $data = explode('/', $_GET['insert']);
                 $projet = $data[1];
                 $this->createTache($projet);
             }
             if (isset($_POST['create'])) {
-
                 Taches::create();
             }
             if (isset($_GET['update'])) {
@@ -30,12 +28,14 @@ class TachesController
 
                 if (isset($_POST['update'])) {
                     $idTache = $_GET['update'];
-                    // 1. cherchez tout les taches d'un projet 
+                    // 1. cherchez tout les taches d'un projet
                     // 2. les ordonnee par priorite
                     // 3. un algo avec le priorite change, qui boucle sur la liste des taches, et change la priorite
                     Taches::updateById();
 
-                    return  header("Refresh:0; url=index.php?page=CreateUpdateTache&update=$idTache");
+                    return header(
+                        "Refresh:0; url=index.php?page=CreateUpdateTache&update=$idTache"
+                    );
                 }
             }
             if (isset($_GET['delete'])) {
@@ -45,7 +45,6 @@ class TachesController
         }
 
         if ($_GET['page'] === 'affichetaches') {
-
             if (isset($_POST['submit'])) {
                 $this->changeStatut();
                 $this->AffichesTaches();
@@ -66,7 +65,6 @@ class TachesController
             header('refresh:0; url=index.php?page=afficheprojets');
         }
         if (isset($_POST['non'])) {
-
             header('location: index.php?page=afficheprojets');
         }
     }
@@ -75,7 +73,7 @@ class TachesController
     {
         if (isset($_POST['statut'])) {
             $selected = $_POST['statut'];
-            $selected = explode("/", $selected);
+            $selected = explode('/', $selected);
             Taches::updateAttributeById('statut', $selected[0], $selected[1]);
         }
     }
@@ -91,14 +89,15 @@ class TachesController
             header('location: index.php');
         }
 
-
         $tache = Taches::getByAttribute('id', $idTache);
         $projet = Projets::getByAttribute('id', $tache[0]->id_projets);
 
         // $view->setVar("projet", $projet);
 
-
-        $users = Affectation::getByAttribute('id_projets', $tache[0]->id_projets);
+        $users = Affectation::getByAttribute(
+            'id_projets',
+            $tache[0]->id_projets
+        );
         $return = [];
 
         foreach ($users as $user) {
@@ -106,9 +105,8 @@ class TachesController
             $return[] = $user[0];
         }
 
-
         $view->setVar('tache', $tache[0]);
-        $view->setVar('TitrePage', "Update un tache");
+        $view->setVar('TitrePage', 'Update un tache');
         $view->setVar('users', $return);
         $view->setVar('projet', $projet[0]);
         $view->render();
@@ -136,13 +134,12 @@ class TachesController
         }
         // variables
 
-        $view->setVar('TitrePage', "Creez un Tache");
-        $view->setVar("projet_id", $projet_id);
+        $view->setVar('TitrePage', 'Creez un Tache');
+        $view->setVar('projet_id', $projet_id);
         $view->setVar('users', $return);
         $view->setVar('projet', $projet[0]);
         $view->render();
     }
-
 
     private function AffichesTaches()
     {
@@ -154,15 +151,13 @@ class TachesController
             header('location: index.php');
         }
 
-
         $user = $_SESSION['id'];
         $projets = Projets::getAllOrderBy('id');
         $taches = Taches::getAllOrderBy('priorite');
         $affectiations = Affectation::getByAttribute('id_users', $user);
 
-
         // variables
-        $view->setVar("TitrePage", "Mes Taches");
+        $view->setVar('TitrePage', 'Mes Taches');
         $view->setVar('user', $user);
         $view->setVar('affectations', $affectiations);
         $view->setVar('taches', $taches);

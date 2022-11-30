@@ -45,13 +45,14 @@ class Model
         return $query->fetchAll(\PDO::FETCH_CLASS, get_called_class());
     }
 
+    //Get All avec Order by
     /**
      * Récupère toutes les lignes d'une table en effectuant un tri
      *
      * @param string $colonneDeTri => le tri se fait en fonction de cette colonne
      * @return array
      */
-    public static function getAllOrderBy($colonneDeTri): array
+    public static function getAllOrderBy($colonneDeTri)
     {
         $query = self::getInstance()->query(
             'select * from ' . self::getClass() . ' order by ' . $colonneDeTri
@@ -62,22 +63,9 @@ class Model
     public static function getById($id)
     {
         $query = self::getInstance()->query(
-            'select * from ' . self::getClass() . ' where id=' . $id
+            'select * from ' . self::getClass()() . ' where id=' . $id
         );
         return $query->fetchAll(\PDO::FETCH_CLASS, get_called_class());
-    }
-
-    /**
-     * retourne le dernier id créé de la table
-     *
-     * @return void
-     */
-    public static function getLastId(){
-        $query = self::getInstance()->query(
-            'select max(id) from ' . self::getClass()
-        );
-        $result = $query->fetchAll(\PDO::FETCH_CLASS, get_called_class());
-        return $result[0]->{"max(id)"};
     }
 
     public static function deleteById($id)
@@ -86,29 +74,17 @@ class Model
         $query = self::getInstance()->exec($sql);
     }
 
-    /**
-     * Suppression par un nom de colonne
-     *
-     * @param string $name => Nom de la colonne
-     * @param string $attribut => Valeur de la colonne
-     * @return void
-     */
-    public static function deleteByAttribute($name, $value)
-    {
-        $sql = 'delete from ' . self::getClass() . ' where ' . $name . '=' . $value;
-        $query = self::getInstance()->exec($sql);
-    }
-
     public static function create()
     {
         $vars = self::clear();
-        $sql = 'insert into ' . self::getClass() . " values(" . $vars[0] . ")";
-        return self::getInstance()->prepare($sql)->execute($vars[1]);
+        $sql = 'insert into ' . self::getClass() . ' values(' . $vars[0] . ')';
+        return self::getInstance()
+            ->prepare($sql)
+            ->execute($vars[1]);
     }
 
     public static function updateById()
     {
-        unset($_POST['update']);
         $sql = 'update ' . self::getClass() . ' set ';
         foreach ($_POST as $key => $value) {
             if ($key === 'create') {
@@ -138,8 +114,9 @@ class Model
         );
         return $query->fetchAll(\PDO::FETCH_CLASS, get_called_class());
     }
+
     /**
-     * update enrigstrement par l'id 
+     * update enrigstrement par l'id
      *
      * @param string $col
      * @param string $value
@@ -148,26 +125,30 @@ class Model
      */
     public static function updateAttributeById($col, $value, $id)
     {
-        $sql = 'update ' . \strtolower(self::getClass()) . ' set ' . $col . " = '" . $value . "' where id=" . $id;
+        $sql =
+            'update ' .
+            \strtolower(self::getClass()) .
+            ' set ' .
+            $col .
+            " = '" .
+            $value .
+            "' where id=" .
+            $id;
 
         $query = self::getInstance()->exec($sql);
     }
 
     private static function clear()
     {
-
         unset($_POST['create']);
-
         $return[] = ':id';
         if (isset($_GET['insert'])) {
             $return[] = ['id' => null];
         }
-
         foreach ($_POST as $key => $value) {
             $return[0] .= ',:' . $key;
             $return[1][$key] = htmlspecialchars($value);
         }
-
         return $return;
     }
 }
