@@ -23,6 +23,8 @@ class TachesController
             if (isset($_POST['create'])) {
 
                 Taches::create();
+                var_dump($_POST);
+            
             }
             if (isset($_GET['update'])) {
                 $idTache = $_GET['update'];
@@ -30,8 +32,12 @@ class TachesController
 
                 if (isset($_POST['update'])) {
                     $idTache = $_GET['update'];
-                    Taches::updateById();
-                    return  header("Refresh:0; url=index.php?page=CreateUpdateTache&update=$idTache");
+                    $tache = Taches::getById($idTache);
+                    $projetId = $tache[0]->id_projets;
+                    $this->prioriteCheck($tache[0]->getPriorite(),$_POST["priorite"], $projetId);
+                    // Taches::updateById();
+                    // return  header("Refresh:0; url=index.php?page=CreateUpdateTache&update=$idTache");
+                    return;
                 }
             }
             if (isset($_GET['delete'])) {
@@ -50,6 +56,42 @@ class TachesController
                 $this->AffichesTaches();
                 return;
             }
+        }
+    }
+
+    private function prioriteCheck($currentPriorite = null, $newPriorite = null, $projet_id)
+    {
+        $return = [];
+        $taches = Taches::getByAttribute('id_projets', $projet_id);
+        foreach ($taches as $tache) {
+            $return += [$tache->getId()=>$tache->getPriorite()];
+        }
+        foreach ($return as $id => $priorite) {
+            if ($newPriorite > $currentPriorite) {
+                if ($newPriorite == $priorite) {
+                   $return[$id] -= 1;
+                } elseif ($currentPriorite == $priorite){
+                    $return[$id] = $newPriorite;
+                }
+
+            } 
+            if ($newPriorite < $currentPriorite) {
+                if ($newPriorite <= $priorite) {
+                    echo $priorite;
+                    echo $id;
+                    $return[$id] += 1;
+                 } elseif ($currentPriorite == $priorite){
+                     $return[$id] = $newPriorite;
+                 }
+            }
+        }
+        var_dump($return);
+    }
+
+    private function changePriorite($taches = null)
+    {
+        foreach ($taches as $id => $priorite) {
+            Taches::updateAttributeById('priorite', $priorite, $id);
         }
     }
 
