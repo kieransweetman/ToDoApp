@@ -16,7 +16,7 @@
 
             <div>
                 <label for="priorite">Priorité:</label>
-                <input type="text" id="priorite" name="priorite" value=<?php echo "'" .
+                <input type="number" min="1" id="priorite" name="priorite" value=<?php echo "'" .
                                                                             $tache->getPriorite() .
                                                                             "'"; ?>>
             </div>
@@ -107,7 +107,7 @@ if (isset($_GET['insert'])) { ?>
 
             <div>
                 <label for="priorite">Priorité:</label>
-                <input type="text" id="priorite" name="priorite" value=''>
+                <input type="number" min="1" id="priorite" name="priorite" value=''>
             </div>
 
             <div>
