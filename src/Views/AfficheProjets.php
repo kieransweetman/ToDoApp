@@ -42,5 +42,4 @@ foreach ($affectations as $affectation) {
         }
     }
 }
-echo "<a href='index.php?page=" . $_GET['page'] . "'&delete=>Supprimer</a> ";
 ?>
