@@ -17,23 +17,32 @@ class ProjetController
     public function __construct()
     {
         if (isset($_GET['delete'])) {
-            if (isset($_POST['oui'])) {
-                Taches::deleteByAttribute('id_projets', $_GET['delete']);
-                Affectation::deleteByAttribute('id_projets', $_GET['delete']);
-                Projets::deleteById((int)$_GET['delete']);
-            }
-            if (isset($_POST['non'])) {
-                //Pour recharger la page en cours et faire disparaître le form de l'affichage
-                header('location: index.php?page=afficheprojets');
-            }
+            $this->delProjet();
             $this->AfficheProjets();
         }
+
         if (isset($_GET['insert'])) {
             $this->CreateProjet();
         } elseif (isset($_GET['update'])) {
             $this->UpdateProjet();
         } else {
             $this->AfficheProjets();
+        }
+
+
+        
+    }
+
+    public function delProjet()
+    {
+        if (isset($_POST['oui'])) {
+            Taches::deleteByAttribute('id_projets', $_GET['delete']);
+            Affectation::deleteByAttribute('id_projets', $_GET['delete']);
+            Projets::deleteById((int)$_GET['delete']);
+        }
+        if (isset($_POST['non'])) {
+            //Pour recharger la page en cours et faire disparaître le form de l'affichage
+            header('location: index.php?page=afficheprojets');
         }
     }
 

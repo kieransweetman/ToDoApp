@@ -25,6 +25,11 @@ class Security
         $pwd = $_POST['pwd'];
         $searchUser = Users::getByAttribute('pseudo', $pseudo);
 
+        if(!$searchUser){
+            $message = "ce compte n'existe pas/ Ou vous n'avez pas saisie vos identifiants correctement";
+            return $message;
+        }
+
         // Gestion login password_hash
         if ($pseudo === $searchUser[0]->getPseudo() && password_verify($_POST['pwd'], $searchUser[0]->getPwd())) {
             session_start();
@@ -32,5 +37,6 @@ class Security
             $_SESSION['pseudo'] = $_POST['pseudo'];
             $_SESSION['id'] = $searchUser[0]->getId();
         }
+
     }
 }

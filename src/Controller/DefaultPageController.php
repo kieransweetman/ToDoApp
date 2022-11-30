@@ -13,7 +13,7 @@ class DefaultPageController
         $view = new Views('DefaultPage', 'Accueil');
 
         if (isset($_POST['submit'])) {
-            Security::ConnectUser();
+            $status = Security::ConnectUser();
         }
 
         if (Security::isConnected()) {
@@ -21,6 +21,11 @@ class DefaultPageController
         } else {
             $view->setVar('connected', false);
         }
+
+        if($status){
+            $view->setVar('message', $status);
+        }
+
         $view->setVar('TitrePage', 'ToDoApp');
         $view->setVar('hello', 'Hello');
         $view->render();
