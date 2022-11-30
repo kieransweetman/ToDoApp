@@ -154,12 +154,12 @@ class TachesController
         $user = $_SESSION['id'];
         $projets = Projets::getAllOrderBy('id');
         $taches = Taches::getAllOrderBy('priorite');
-        $affectiations = Affectation::getByAttribute('id_users', $user);
+        $affectations = Affectation::getByAttribute('id_users', $user);
 
         // variables
         $view->setVar('TitrePage', 'Mes Taches');
         $view->setVar('user', $user);
-        $view->setVar('affectations', $affectiations);
+        $view->setVar('affectations', $affectations);
         $view->setVar('taches', $taches);
         $view->setVar('projets', $projets);
         $view->render();

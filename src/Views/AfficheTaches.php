@@ -1,10 +1,10 @@
 <h2>Listes de mes taches</h2>
 <main>
-<?php foreach ($projs as $proj):
+<?php foreach ($affectations as $affectation):
     foreach ($projets as $projet):
         if (
-            $user === $proj->getId_user() &&
-            $proj->getId_projets() === $projet->getId()
+            $user === $affectation->getId_user() &&
+            $affectation->getId_projets() === $projet->getId()
         ):
             foreach ($taches as $tache):
                 if (
