@@ -144,8 +144,16 @@ class ProjetController
         if(isset($_GET['deleteuser'])){
             $user = Users::getByAttribute('pseudo', $_GET['deleteuser']);
             $id_user = $user[0]->getId();
-            Affectation::deleteByTwoAttributes('id_users', $id_user, 'id_projets', $_GET['update'] );
-            header('location: index.php?page=afficheprojets&update='.$_GET['update']);
+            if(isset($_GET['deleteuser'])){
+                if (isset($_POST['oui'])) {
+                    Affectation::deleteByTwoAttributes('id_users', $id_user, 'id_projets', $_GET['update'] );
+                    //désaffectation des tâches
+                    header('location: index.php?page=afficheprojets&update='.$_GET['update']);
+                }
+                elseif (isset($_POST['non'])) {
+                    header('location: index.php?page=afficheprojets&update='.$_GET['update']);
+                }
+            }
         }
         $view->render();
     }
