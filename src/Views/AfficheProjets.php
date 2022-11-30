@@ -4,6 +4,7 @@ echo '<h2>Liste de mes projets</h2>';
 
 //Boucle sur les affectations
 foreach ($affectations as $affectation) {
+    
     //Boucle pour afficher les projets
     foreach ($projets as $projet) {
         //Condition pour afficher seulement les projets pour lesquels l'utilisateur courant est administrateur
@@ -41,3 +42,5 @@ foreach ($affectations as $affectation) {
         }
     }
 }
+echo "<a href='index.php?page=" . $_GET['page'] . "'&delete=>Supprimer</a> ";
+?>
