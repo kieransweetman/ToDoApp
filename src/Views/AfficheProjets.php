@@ -4,12 +4,13 @@ echo '<h2>Liste de mes projets</h2>';
 
 //Boucle sur les affectations
 foreach ($affectations as $affectation) {
+    
     //Boucle pour afficher les projets
     foreach ($projets as $projet) {
         //Condition pour afficher seulement les projets pour lesquels l'utilisateur courant est administrateur
         if ($_SESSION['id'] === $affectation->getId_users() && $affectation->getId_projets() === $projet->getId() && $affectation->getAdmin() === true) {
             echo $projet->getLibelle();
-            echo "<a href='index.php?page=" . $_GET['page'] . '&update=' . $projet->getId() . "'>Modifier</a> ";
+            echo "<a href='index.php?page=" . $_GET['page'] . '&update=' . $projet->getId() . "'>Modifier/Affecter</a> ";
             echo "<a href='index.php?page=" . $_GET['page'] . '&delete=' . $projet->getId() . "'>Supprimer</a> ";
             echo "<a href='index.php?page=CreateUpdateTache"  . '&insert=tache/' . $projet->getId() . "'>Ajouter une tâche</a><br>";
             //Apparition du bouton en cas de suppression
@@ -41,3 +42,5 @@ foreach ($affectations as $affectation) {
         }
     }
 }
+echo "<a href='index.php?page=" . $_GET['page'] . "'&delete=>Supprimer</a> ";
+?>

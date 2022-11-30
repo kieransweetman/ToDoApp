@@ -101,6 +101,12 @@ class Model
         $query = self::getInstance()->exec($sql);
     }
 
+    public static function deleteByTwoAttributes($name1, $value1, $name2, $value2)
+    {
+        $sql = 'delete from ' . self::getClass() . ' where '.$name1.'=' . $value1 . ' and '.$name2.'=' . $value2;
+        $query = self::getInstance()->exec($sql);
+    }
+
     public static function create()
     {
         $vars = self::clear();
