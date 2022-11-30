@@ -93,16 +93,16 @@ class ProjetController
             }
             $view->setVar('libelle', $_POST['libelle']);
         }
-        if (($message1 = $this->isValidAddUser()) === '') {
-            if (isset($_POST['pseudo'])) {
-                $user = Users::getByAttribute('pseudo', $_POST['pseudo']);
-                $id_user = $user[0]->getId();
-                Affectation::createAffectation(Projets::getLastId(), $id_user, '0');
-                $view->setVar('message1', 'L\'utilisateur a bien été ajouté');
-            }
-        } else {
-            $view->setVar('message1', $message1);
-        }
+        // if (($message1 = $this->isValidAddUser()) === '') {
+        //     if (isset($_POST['pseudo'])) {
+        //         $user = Users::getByAttribute('pseudo', $_POST['pseudo']);
+        //         $id_user = $user[0]->getId();
+        //         Affectation::createAffectation(Projets::getLastId(), $id_user, '0');
+        //         $view->setVar('message1', 'L\'utilisateur a bien été ajouté');
+        //     }
+        // } else {
+        //     $view->setVar('message1', $message1);
+        // }
         $view->render();
        
     }
@@ -135,6 +135,16 @@ class ProjetController
             } else {
                 $view->setVar('message', $message);
             }
+        }
+        if (($message1 = $this->isValidAddUser()) === '') {
+            if (isset($_POST['pseudo'])) {
+                $user = Users::getByAttribute('pseudo', $_POST['pseudo']);
+                $id_user = $user[0]->getId();
+                Affectation::createAffectation($_GET['update'], $id_user, '0');
+                $view->setVar('message1', 'L\'utilisateur a bien été ajouté');
+            }
+        } else {
+            $view->setVar('message1', $message1);
         }
         $view->render();
     }

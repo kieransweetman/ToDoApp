@@ -20,9 +20,6 @@ if(isset($_GET['update'])) :
 }
 
 endif ;
-// echo '<pre>';
-// var_dump($users);
-// echo '</pre>';
 ?>
 <h2>Utilisateurs affectés au projet</h2>
 <?php
