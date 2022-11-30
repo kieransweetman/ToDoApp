@@ -128,7 +128,7 @@ class TachesController
         //retourne la liste des users qui sont affecté au projet
         $return = [];
 
-        foreach ($users as $user) {
+        foreach ($users[0] as $user) {
             $user = Users::getById($user->getId_users());
             $return[] = $user[0];
         }
