@@ -133,10 +133,14 @@ class ProjetController
                 $user = Users::getByAttribute('pseudo', $_POST['pseudo']);
                 $id_user = $user[0]->getId();
                 //Créer affectation à un utilisateur non admin
+                if (($message1 = $this->isValidAddAdmin()) === '') {
                 Affectation::createAffectation($_GET['update'], $id_user, '0');
                 $view->setVar('message1', 'L\'utilisateur a bien été ajouté');
                 header('location: index.php?page=afficheprojets&update='.$_GET['update']);
+            }else {
+                $view->setVar('message1', $message1);
             }
+        }
         } else {
             $view->setVar('message1', $message1);
         }
@@ -205,6 +209,20 @@ class ProjetController
             $pseudo = Users::getByAttribute('pseudo', $_POST['pseudo']);
             if (count($pseudo) == 0) {
                 $return .= "Veuillez créer l'utilisateur <a href='index.php?page=afficheprojets&update=".$_GET['update']."&adduser='>Cliquez ici<br></a><br>";
+            }
+        }
+        return $return;
+    }
+
+    private function isValidAddAdmin()
+    {
+        $return = '';
+        // Validation du formulaire pour qu'un admin ne puisse pas s'affecter à un projet qu'il a créé
+        if (isset($_POST['pseudo'])) {
+            $pseudo = Users::getByAttribute('pseudo', $_POST['pseudo']);
+            $affectation = Affectation::getByAttribute('id_users', $_SESSION['id']);
+            if ($pseudo[0]->getId() == $affectation[0]->getId_user()) {
+                $return .= "Un admnistrateur ne peut pas être affecté à un projet";
             }
         }
         return $return;
