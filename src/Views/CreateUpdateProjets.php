@@ -14,13 +14,21 @@ if(isset($_GET['update'])) :
     <label for="">Utilisateurs</label><br>
     <input type="text" name="pseudo"><br>
     <input type="submit" name="addUser" value="Ajouter utilisateur">
-</form>
+</form><br>
 <?php if (isset($_POST['pseudo'])) {
     echo '<div>'.$message1.'</div>';
-}
+}?>
+
+<?php if (isset($_GET['adduser'])) :?>
+<h2>Créer un nouvel utilisateur</h2>
+<form method='POST' action=''>
+        <input type='text' name='pseudo' placeholder='Nouveau pseudo' value="<?php echo (isset($pseudo)) ? $pseudo : ''; ?>"><br> <br>
+        <input type='email' name='mail' placeholder='Nouveau mail' value="<?php echo (isset($mail)) ? $mail : ''; ?>"><br> <br>
+        <input type='submit' name='submit' value="Créer utilisateur">
+    </form>
+<?php  endif ;?>
 
 
-?>
 <h2>Utilisateurs affectés au projet</h2>
 <?php
 
