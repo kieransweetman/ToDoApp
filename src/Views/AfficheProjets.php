@@ -31,8 +31,8 @@ foreach ($affectations as $affectation) {
                             echo $user->getPseudo();
                         }
                     }
-                    echo "<a href='index.php?page=CreateUpdateTache"  . '&update=' . $tache->getId() . "'>Modifier</a> ";
-                    echo "<a href='index.php?page=CreateUpdateTache"  . '&delete=' . $tache->getId() . "'>Supprimer</a> ";
+                    echo "<a href='index.php?page=CreateUpdateTache"  . '&update=' . $tache->getId() . "'> Modifier</a> ";
+                    echo "<a href='index.php?page=CreateUpdateTache"  . '&delete=' . $tache->getId() . "'> Supprimer</a> ";
 
                     echo '<br>';
                 }

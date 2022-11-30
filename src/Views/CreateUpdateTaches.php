@@ -143,7 +143,7 @@ if (isset($_GET['insert'])) {
             </div>
 
             <div>
-                <input type="submit" value="valider" name='update'>
+                <input type="submit" value="valider" name='create'>
             </div>
         </form>
     </main>

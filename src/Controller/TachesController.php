@@ -15,15 +15,17 @@ class TachesController
     {
 
         if ($_GET['page'] === 'CreateUpdateTache') {
+
             if (isset($_GET['insert'])) {
                 $data = explode("/", $_GET['insert']);
                 $projet = $data[1];
                 $this->createTache($projet);
             }
-            if (isset($_POST['create'])) {
 
+            if (isset($_POST['create'])) {
                 Taches::create();
             }
+
             if (isset($_GET['update'])) {
                 $idTache = $_GET['update'];
                 $this->updateTache($idTache);
@@ -35,9 +37,10 @@ class TachesController
                     // 3. un algo avec le priorite change, qui boucle sur la liste des taches, et change la priorite
                     Taches::updateById();
 
-                    return  header("Refresh:0; url=index.php?page=CreateUpdateTache&update=$idTache");
+                    return  header("Refresh:0; url=index.php?page=afficheprojets");
                 }
             }
+
             if (isset($_GET['delete'])) {
                 $idTache = $_GET['delete'];
                 $this->delTache($idTache);
@@ -80,6 +83,12 @@ class TachesController
         }
     }
 
+    /**
+     * Modifier et mettre à jour un tache
+     *
+     * @param  $idTache
+     * @return void
+     */
     private function updateTache($idTache = null)
     {
         $view = new Views('CreateUpdateTaches', 'Update Tache');
@@ -94,11 +103,10 @@ class TachesController
 
         $tache = Taches::getByAttribute('id', $idTache);
         $projet = Projets::getByAttribute('id', $tache[0]->id_projets);
-
-        // $view->setVar("projet", $projet);
-
-
         $users = Affectation::getByAttribute('id_projets', $tache[0]->id_projets);
+
+
+        // genere un tableau avec tout les users affecté sur un projet 
         $return = [];
 
         foreach ($users as $user) {
@@ -106,6 +114,7 @@ class TachesController
             $return[] = $user[0];
         }
 
+        // variables
 
         $view->setVar('tache', $tache[0]);
         $view->setVar('TitrePage', "Update un tache");
@@ -127,7 +136,7 @@ class TachesController
         $projet = Projets::getByAttribute('id', $projet_id);
         $users = Affectation::getByAttribute('id_projets', $projet_id);
 
-        //retourne la liste des users qui sont affecté au projet
+        //  genere un tableau avec tout les users affecté sur un projet 
         $return = [];
 
         foreach ($users as $user) {
