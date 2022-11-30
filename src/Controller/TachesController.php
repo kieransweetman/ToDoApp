@@ -106,12 +106,11 @@ class TachesController
 
         // genere un tableau avec tout les users affecté sur un projet 
         $return = [];
-
-        foreach ($users[0] as $user) {
+        foreach ($users as $user) {
+            
             $user = Users::getById($user->getId_users());
             $return[] = $user[0];
         }
-
         // variables
 
         $view->setVar('tache', $tache[0]);
@@ -136,8 +135,8 @@ class TachesController
 
         //  genere un tableau avec tout les users affecté sur un projet 
         $return = [];
-
-        foreach ($users[0] as $user) {
+        foreach ($users as $user) {
+            
             $user = Users::getById($user->getId_users());
             $return[] = $user[0];
         }

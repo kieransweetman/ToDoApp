@@ -1,7 +1,6 @@
 <?php if (isset($_GET['update']) || isset($_GET['delete'])) { ?>
 
 
-    // Mettre a jour un Tache
 
     <main>
         <form action="" method="POST">
@@ -11,15 +10,15 @@
             <div>
                 <label for="titre">Nom de la tâche:</label>
                 <input type="text" id="titre" name="titre" value=<?php echo "'" .
-                    $tache->getTitre() .
-                    "'"; ?>>
+                                                                        $tache->getTitre() .
+                                                                        "'"; ?>>
             </div>
 
             <div>
                 <label for="priorite">Priorité:</label>
                 <input type="text" id="priorite" name="priorite" value=<?php echo "'" .
-                    $tache->getPriorite() .
-                    "'"; ?>>
+                                                                            $tache->getPriorite() .
+                                                                            "'"; ?>>
             </div>
 
             <div>
@@ -30,41 +29,37 @@
 
                     <option value="">Statut</option>
                     <option value="Non Débuté" <?php if (
-                        $tache->getStatut() === 'Non Débuté'
-                    ):
-                        echo 'selected';
-                    endif; ?>>Non débuté </option>
+                                                    $tache->getStatut() === 'Non Débuté'
+                                                ) :
+                                                    echo 'selected';
+                                                endif; ?>>Non débuté </option>
                     <option value="En Cours" <?php if (
-                        $tache->getStatut() === 'En cours'
-                    ):
-                        echo 'selected';
-                    endif; ?>>En cours</option>
+                                                    $tache->getStatut() === 'En cours'
+                                                ) :
+                                                    echo 'selected';
+                                                endif; ?>>En cours</option>
 
                     <option value="Terminé" <?php if (
-                        $tache->getStatut() === 'Terminé'
-                    ):
-                        echo 'selected';
-                    endif; ?>>Terminé</option>
+                                                $tache->getStatut() === 'Terminé'
+                                            ) :
+                                                echo 'selected';
+                                            endif; ?>>Terminé</option>
                 </select>
             </div>
             <div>
                 <label for="description">Description:</label>
                 <input type="text" id="description" name="description" value=<?php echo "'" .
-                    $tache->getDescription() .
-                    "'"; ?>>
+                                                                                    $tache->getDescription() .
+                                                                                    "'"; ?>>
             </div>
             <div>
                 <label for="user">Affectation:</label>
                 <select name="id_users" id="user">
-                    <?php foreach ($users as $user) {var_dump($user); ?>
+                    <?php foreach ($users as $user) { ?>
+                        <option value=<?php echo "'" .
+                                            $user->getId() .
+                                            "'"; ?>> <?php echo $user->getPseudo(); ?></option>
                         
-                        <option value=<?php
-                        echo "'" . $user->getId() . "'";
-                        if (
-                            $user->getId() === $tache->id_users
-                        ): ?> selected <?php endif;
-                        ?>> <?php echo $user->getPseudo(); ?></option>
-
                     <?php } ?>
 
 
@@ -80,10 +75,10 @@
 
             <div>
                 <input type="submit" value="valider" name='update' <?php if (
-                    isset($_GET['delete'])
-                ):
-                    echo "style='display:none;'";
-                endif; ?>>
+                                                                        isset($_GET['delete'])
+                                                                    ) :
+                                                                        echo "style='display:none;'";
+                                                                    endif; ?>>
             </div>
         </form>
 
@@ -138,8 +133,8 @@ if (isset($_GET['insert'])) { ?>
                     <?php foreach ($users as $user) { ?>
 
                         <option value=<?php echo "'" .
-                            $user->getId() .
-                            "'"; ?>> <?php echo $user->getPseudo(); ?></option>
+                                            $user->getId() .
+                                            "'"; ?>> <?php echo $user->getPseudo(); ?></option>
 
                     <?php } ?>
 

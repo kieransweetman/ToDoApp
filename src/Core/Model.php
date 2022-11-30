@@ -63,7 +63,7 @@ class Model
     public static function getById($id)
     {
         $query = self::getInstance()->query(
-            'select * from ' . self::getClass()() . ' where id=' . $id
+            'select * from ' . self::getClass() . ' where id=' . $id
         );
         return $query->fetchAll(\PDO::FETCH_CLASS, get_called_class());
     }
