@@ -23,19 +23,19 @@
                                         <p>priorit <?php echo $tache->getPriorite(); ?></p>
                                         <label for="statut" style="margin: 16px 0px;"></label>
                                         <select name="statut" id="statut" style="height:50%; margin: 16px 0px;">
-                                            <option value="" <?php echo $tache->getStatut() ===
+                                            <option value=""  <?php echo $tache->getStatut() ===
                                             null
                                                 ? 'disabled selected'
                                                 : ''; ?>>Statut</option>
-                                            <option value="" <?php echo $tache->getStatut() ===
+                                            <option  <?php echo "value='Non Débuté/".$tache->getId()."'"; echo $tache->getStatut() ===
                                             'Non Débuté'
                                                 ? 'selected'
                                                 : ''; ?>>Non débuté </option>
-                                            <option value="" <?php echo $tache->getStatut() ===
+                                            <option <?php echo "value='En Cours/".$tache->getId()."'"; echo $tache->getStatut() ===
                                             'En Cours'
                                                 ? 'selected'
-                                                : ''; ?>>En cours</option>
-                                            <option value="" <?php echo $tache->getStatut() ===
+                                                : ''; ?>>En Cours</option>
+                                            <option <?php echo "value='Terminé/".$tache->getId()."'"; echo $tache->getStatut() ===
                                             'Terminé'
                                                 ? 'selected'
                                                 : ''; ?>>Terminé</option>
@@ -48,7 +48,7 @@
                                         <?php echo $tache->getDescription(); ?>
                                     </p>
 
-                                    <input type="submit" value="Valider" style="width: 3.5  rem;">
+                                    <input type="submit" value="Valider"  name='submit' style="width: 3.5  rem;">
 
                                 </form>
                             </div>

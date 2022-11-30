@@ -67,10 +67,30 @@ class Model
         );
         return $query->fetchAll(\PDO::FETCH_CLASS, get_called_class());
     }
+    public static function getLastId()
+    {
+        $query = self::getInstance()->query(
+            'select max(id) from ' . self::getClass()
+        );
+        $result = $query->fetchAll(\PDO::FETCH_CLASS, get_called_class());
+        return $result[0]->{"max(id)"};
+    }
 
     public static function deleteById($id)
     {
         $sql = 'delete from ' . self::getClass() . ' where id=' . $id;
+        $query = self::getInstance()->exec($sql);
+    }
+
+    public static function deleteByAttribute($name, $value)
+    {
+        $sql =
+            'delete from ' .
+            self::getClass() .
+            ' where ' .
+            $name .
+            '=' .
+            $value;
         $query = self::getInstance()->exec($sql);
     }
 
