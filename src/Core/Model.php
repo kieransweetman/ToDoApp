@@ -176,7 +176,7 @@ class Model
     {
         unset($_POST['create']);
         $return[] = ':id';
-        if (isset($_GET['insert'])) {
+        if (isset($_GET['insert']) || isset($_GET['insertuser'])) {
             $return[] = ['id' => null];
         }
         foreach ($_POST as $key => $value) {
