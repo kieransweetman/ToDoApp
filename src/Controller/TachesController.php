@@ -13,13 +13,83 @@ class TachesController
 {
     public function __construct()
     {
-        $this->AffichesTaches();
+        if ($_GET['page'] === 'CreateUpdateTache') {
+
+            if (isset($_GET['insert'])) {
+                $data = explode('/', $_GET['insert']);
+                $projet = $data[1];
+                $this->createTache($projet);
+            }
+            if (isset($_POST['create'])) {
+                Taches::create();
+            }
+
+            if (isset($_GET['update'])) {
+                $idTache = $_GET['update'];
+                $this->updateTache($idTache);
+
+                if (isset($_POST['update'])) {
+                    // 1. cherchez tout les taches d'un projet
+                    // 2. les ordonnee par priorite
+                    // 3. un algo avec le priorite change, qui boucle sur la liste des taches, et change la priorite
+                    Taches::updateById();
+                    return  header("location: index.php?page=afficheprojets");
+                }
+            }
+
+            if (isset($_GET['delete'])) {
+                $idTache = $_GET['delete'];
+                $this->delTache($idTache);
+            }
+        }
+
+        if ($_GET['page'] === 'affichetaches') {
+            if (isset($_POST['submit'])) {
+                $this->changeStatut();
+                $this->AffichesTaches();
+                return;
+            } else {
+                $this->AffichesTaches();
+                return;
+            }
+        }
     }
 
-    private function AffichesTaches()
+    private function delTache($idTache = null)
     {
-        $view = new Views('AfficheTaches', 'Mes Taches');
-        $view->setVar("TitrePage", "Mes Taches");
+        $this->updateTache($idTache);
+
+        if (isset($_POST['oui'])) {
+            Taches::deleteById($_GET['delete']);
+            header('refresh:0; url=index.php?page=afficheprojets');
+        }
+        if (isset($_POST['non'])) {
+            header('location: index.php?page=afficheprojets');
+        }
+    }
+
+    private function changeStatut()
+    {
+
+        if (isset($_POST['statut'])) {
+            $selected = $_POST['statut'];
+
+            $selected = explode('/', $selected);
+
+            Taches::updateAttributeById('statut', $selected[0], $selected[1]);
+        }
+    }
+
+    /**
+     * Modifier et mettre à jour un tache
+     *
+     * @param  $idTache
+     * @return void
+     */
+    private function updateTache($idTache = null)
+    {
+        $view = new Views('CreateUpdateTaches', 'Update Tache');
+        $idTache = intVal($idTache);
 
         if (Security::isConnected()) {
             $view->setVar('connected', true);
@@ -27,14 +97,75 @@ class TachesController
             header('location: index.php');
         }
 
+        $tache = Taches::getByAttribute('id', $idTache);
+        $projet = Projets::getByAttribute('id', $tache[0]->id_projets);
+        $users = Affectation::getByAttribute('id_projets', $tache[0]->id_projets);
 
+
+        // genere un tableau avec tout les users affecté sur un projet 
+        $return = [];
+        foreach ($users as $user) {
+            
+            $user = Users::getById($user->getId_users());
+            $return[] = $user[0];
+        }
+        // variables
+
+        $view->setVar('tache', $tache[0]);
+        $view->setVar('TitrePage', 'Update un tache');
+        $view->setVar('users', $return);
+        $view->setVar('projet', $projet[0]);
+        $view->render();
+    }
+
+    private function createTache($projet_id = null)
+    {
+        $view = new Views('CreateUpdateTaches', 'Creez un Tache');
+
+        if (Security::isConnected()) {
+            $view->setVar('connected', true);
+        } else {
+            header('location: index.php');
+        }
+
+        $projet = Projets::getByAttribute('id', $projet_id);
+        $users = Affectation::getByAttribute('id_projets', $projet_id);
+
+        //  genere un tableau avec tout les users affecté sur un projet 
+        $return = [];
+        foreach ($users as $user) {
+            
+            $user = Users::getById($user->getId_users());
+            $return[] = $user[0];
+        }
+        // variables
+
+        $view->setVar('TitrePage', 'Creez un Tache');
+        $view->setVar('projet_id', $projet_id);
+        $view->setVar('users', $return);
+        $view->setVar('projet', $projet[0]);
+        $view->render();
+    }
+
+    private function AffichesTaches()
+    {
+        $view = new Views('AfficheTaches', 'Mes Taches');
+
+        if (Security::isConnected()) {
+            $view->setVar('connected', true);
+        } else {
+            header('location: index.php');
+        }
+
+        $user = $_SESSION['id'];
         $projets = Projets::getAllOrderBy('id');
         $taches = Taches::getAllOrderBy('priorite');
-        $user = $_SESSION['id'];
-        $projs = Affectation::getByAttribute('id_users', $user);
+        $affectations = Affectation::getByAttribute('id_users', $user);
 
+        // variables
+        $view->setVar('TitrePage', 'Mes Taches');
         $view->setVar('user', $user);
-        $view->setVar('projs', $projs);
+        $view->setVar('affectations', $affectations);
         $view->setVar('taches', $taches);
         $view->setVar('projets', $projets);
         $view->render();
