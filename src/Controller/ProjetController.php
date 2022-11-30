@@ -30,7 +30,7 @@ class ProjetController
         }
 
 
-        $this->AfficheProjets();
+        
     }
 
     public function delProjet()
