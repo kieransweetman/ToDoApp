@@ -19,11 +19,13 @@ if(isset($_GET['update'])) :
     echo '<div>'.$message1.'</div>';
 }
 
-endif ;
+
 ?>
 <h2>Utilisateurs affectés au projet</h2>
 <?php
+
 foreach($users as $user){
-    echo $user->getPseudo().'<a href="">Désaffecter</a><br>';
+    echo $user->getPseudo()."<a href='index.php?page=" . $_GET['page'] .'&update='.$_GET['update']."&deleteuser=".$user->getPseudo()."'>Désaffecter</a><br>";
 }
+endif ;
 ?>

@@ -81,6 +81,7 @@ class ProjetController
         if (isset($_POST['create'])) {
             if (($message = $this->isValid()) === '') {
                 if (Projets::create()) {
+                    //Création et affectation au projet en administrateur
                     Affectation::createAffectation(Projets::getLastId(), $_SESSION['id'], '1');
                     $view->setVar('message', 'Un projet a bien été créé');
                     $view->setVar('action', '');
@@ -93,16 +94,6 @@ class ProjetController
             }
             $view->setVar('libelle', $_POST['libelle']);
         }
-        // if (($message1 = $this->isValidAddUser()) === '') {
-        //     if (isset($_POST['pseudo'])) {
-        //         $user = Users::getByAttribute('pseudo', $_POST['pseudo']);
-        //         $id_user = $user[0]->getId();
-        //         Affectation::createAffectation(Projets::getLastId(), $id_user, '0');
-        //         $view->setVar('message1', 'L\'utilisateur a bien été ajouté');
-        //     }
-        // } else {
-        //     $view->setVar('message1', $message1);
-        // }
         $view->render();
        
     }
@@ -128,6 +119,7 @@ class ProjetController
         $view->setVar('libelle', $projet[0]->getLibelle());
         if (isset($_POST['create'])) {
             if (($message = $this->isValid()) === '') {
+                //Modification du nom d'un projet
                 if (Projets::updateById()) {
                     $view->setVar('message', 'Un projet a été modifié');
                 }
@@ -140,8 +132,10 @@ class ProjetController
             if (isset($_POST['pseudo'])) {
                 $user = Users::getByAttribute('pseudo', $_POST['pseudo']);
                 $id_user = $user[0]->getId();
+                //Créer affectation à un utilisateur non admin
                 Affectation::createAffectation($_GET['update'], $id_user, '0');
                 $view->setVar('message1', 'L\'utilisateur a bien été ajouté');
+                header('location: index.php?page=afficheprojets&update='.$_GET['update']);
             }
         } else {
             $view->setVar('message1', $message1);
@@ -149,6 +143,7 @@ class ProjetController
         $view->render();
     }
 
+    //Affichage des utilisateurs du projets courant
     private function AfficheUsers()
     {
         $projet = $_GET['update'];
