@@ -9,7 +9,7 @@ foreach ($affectations as $affectation) {
         //Condition pour afficher seulement les projets pour lesquels l'utilisateur courant est administrateur
         if ($_SESSION['id'] === $affectation->getId_users() && $affectation->getId_projets() === $projet->getId() && $affectation->getAdmin() === true) {
             echo $projet->getLibelle();
-            echo "<a href='index.php?page=" . $_GET['page'] . '&update=' . $projet->getId() . "'>Modifier</a> ";
+            echo "<a href='index.php?page=" . $_GET['page'] . '&update=' . $projet->getId() . "'>Modifier/Affecter</a> ";
             echo "<a href='index.php?page=" . $_GET['page'] . '&delete=' . $projet->getId() . "'>Supprimer</a> ";
             echo "<a href='index.php?page=" . $_GET['page'] . '&insert=tache' . $projet->getId() . "'>Ajouter une tâche</a><br>";
             //Apparition du bouton en cas de suppression

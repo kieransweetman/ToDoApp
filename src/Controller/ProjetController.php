@@ -79,10 +79,12 @@ class ProjetController
         $view->setVar('action', '&insert=projet');
         $view->setVar('submit', 'Créer projet');
         if (isset($_POST['create'])) {
-            if (($message = $this->isValidCreate()) === '') {
+            if (($message = $this->isValid()) === '') {
                 if (Projets::create()) {
                     Affectation::createAffectation(Projets::getLastId(), $_SESSION['id'], '1');
                     $view->setVar('message', 'Un projet a bien été créé');
+                    $view->setVar('action', '');
+                    $view->setVar('submit', 'Retour');
                 } else {
                     $view->setVar('message', 'Une erreur est survenue!');
                 }
@@ -102,6 +104,7 @@ class ProjetController
             $view->setVar('message1', $message1);
         }
         $view->render();
+       
     }
 
     public function UpdateProjet()
@@ -109,19 +112,22 @@ class ProjetController
         //Création de la vue
         $view = new Views('CreateUpdateProjets', 'Modification d\'un projet');
         //Vérification et maintien de la session, sinon retour à l'accueil
+
         if (Security::isConnected()) {
             $view->setVar('connected', true);
         } else {
             header('location: index.php');
         }
+        
         //Ajout de variables au tableau setVar pour les récupérer sur la View
         $view->setVar('TitrePage', 'Modification de projet');
         $view->setVar('action', "&update=" . $_GET['update']);
         $view->setVar('submit', 'Modifier');
+        $view->setvar('users',$this->AfficheUsers());
         $projet = Projets::getById($_GET['update']);
         $view->setVar('libelle', $projet[0]->getLibelle());
         if (isset($_POST['create'])) {
-            if (($message = $this->isValidUpdate()) === '') {
+            if (($message = $this->isValid()) === '') {
                 if (Projets::updateById()) {
                     $view->setVar('message', 'Un projet a été modifié');
                 }
@@ -133,19 +139,20 @@ class ProjetController
         $view->render();
     }
 
-    //Test de validation pour éviter les doublons de libellé en création
-    private function isValidCreate()
+    private function AfficheUsers()
     {
-        $return = '';
-        $projets = Projets::getByAttribute('libelle', $_POST['libelle']);
-        if (count($projets) > 0) {
-            $return = "Le libellé de ce projet existe déjà";
+        $projet = $_GET['update'];
+        $affectations = Affectation::getByAttribute('id_projets',$projet);
+        $users = [];
+        foreach($affectations as $value){
+            $users[] = $value->getId_Users();
         }
-        return $return;
+        return Users::getPseudoWithId($users);
+        
     }
 
     //Test de validation pour éviter les doublons de libellé en modification
-    private function isValidUpdate()
+    private function isValid()
     {
         $return = '';
         $projets = Projets::getByAttribute('libelle', $_POST['libelle']);

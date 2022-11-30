@@ -1,7 +1,7 @@
 <header>
 
 <!-- Définit le titre en haut de la page -->
-    <h2><?php echo $TitrePage; ?></h2>
+    <h1><?php echo $TitrePage; ?></h1>
 
     <nav>
 <!-- Barre de anvigation qui s'affiche à toutes les pages -->

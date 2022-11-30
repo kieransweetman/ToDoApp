@@ -11,6 +11,16 @@ class Users extends Model{
     private string $mail;
     private string $pwd;
 
+    public static function getPseudoWithId($ids){
+        $where = '';
+        foreach($ids as $id){
+            $where .= $id . ',';
+        }
+        $where = substr($where,0,strlen($where)-1);
+        $query = self::getInstance()->query('select distinct pseudo from users join affectation on id_users=id where id in(' . $where . ') and admin=0 and id_projets='. $_GET['update']);
+        var_dump($query);
+        return $query->fetchAll(\PDO::FETCH_CLASS, get_called_class());
+    }
 
     /**
      * Get the value of id
