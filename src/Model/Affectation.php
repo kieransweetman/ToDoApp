@@ -10,6 +10,14 @@ class Affectation extends Model
     private $id_users;
     private bool $admin;
 
+    /**
+     * Création d'une affectation à un projet
+     *
+     * @param [type] $id_projet
+     * @param [type] $id_users
+     * @param [type] $isadmin
+     * @return void
+     */
     public static function createAffectation($id_projet, $id_users, $isadmin)
     {
         $vars = self::clearAffectation($id_projet, $id_users, $isadmin);
@@ -17,6 +25,14 @@ class Affectation extends Model
         return self::getInstance()->prepare($sql)->execute($vars[1]);
     }
 
+    /**
+     * formatage pour createAffectation
+     *
+     * @param [type] $id_projet
+     * @param [type] $id_users
+     * @param [type] $isadmin
+     * @return void
+     */
     private static function clearAffectation($id_projet, $id_users, $isadmin)
     {
         $return[] = ':id_projets,:id_users,:admin';

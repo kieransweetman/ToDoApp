@@ -26,6 +26,10 @@ if(isset($_GET['update'])) :
 
 foreach($users as $user){
     echo $user->getPseudo()."<a href='index.php?page=" . $_GET['page'] .'&update='.$_GET['update']."&deleteuser=".$user->getPseudo()."'>Désaffecter</a><br>";
+    if(isset($_GET['deleteuser']) && $_GET['deleteuser'] === $user->getPseudo()){
+        echo "Êtes-vous certain(e) de vouloir effectuer la désaffectation? Si une tâche lui été affecté, elle n'aura plus d'utilisateur affecté";
+        echo "<form method='POST'><input type='submit' name='oui' value ='Oui''><input type='submit' name='non' value ='Non''></form>";
+    }
 }
 endif ;
 ?>
