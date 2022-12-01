@@ -1,7 +1,8 @@
-    <footer>
-    <nav class="footerNav">
-    <p class="Auteurs">Authors :</p>
-            <ul>
+        <?php ?>
+        <footer>
+            <nav class="footerNav">
+                <p class="Auteurs">Authors :</p>
+                <ul>
                     <li><a href="https://www.linkedin.com/in/gr%C3%A9gory-koch-206a1b163/">Grégory Koch <ion-icon name="logo-linkedin"></ion-icon>
                         </a></li>
                     <li><a href="https://www.linkedin.com/in/kieran-sweetman/">Kieran Sweetman <ion-icon name="logo-linkedin"></ion-icon>

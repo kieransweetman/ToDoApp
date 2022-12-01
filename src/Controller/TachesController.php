@@ -35,10 +35,25 @@ class TachesController
                     // 1. cherchez tout les taches d'un projet
                     // 2. les ordonnee par priorite
                     // 3. un algo avec le priorite change, qui boucle sur la liste des taches, et change la priorite
+                    $tache = Taches::getById($idTache);
+                    $projetId = $tache[0]->id_projets;
+                    
                     if(($message =$this->verifyUpdateTask()) === ''){
                         Taches::updateById();
                     }
-                    return  header("location: index.php?page=afficheprojets");
+
+                    Taches::updateById();
+
+                    $prioriteValide = $this->prioriteCheck($tache[0]->getPriorite(),$_POST["priorite"], $projetId, $tache[0]->getId());
+                    foreach($prioriteValide as $tache){
+                        $this->changePriorite($tache);
+                    }
+                    
+                   
+                    
+                    
+                    echo "<meta http-equiv='refresh' content='0;URL=index.php?page=afficheprojets'>";
+                    return;
                 }
             }
 
@@ -62,16 +77,120 @@ class TachesController
         }
     }
 
+    private function prioriteCheck($currentPriorite = null, $newPriorite = null, $projet_id = null, $tacheId = null)
+    {
+
+        //definir les tableau pour check et faire les changements
+        $temp = [];
+        $return = [];
+        $taches = Taches::getByAttribute('id_projets', $projet_id);
+
+        $count = 0;
+        foreach ($taches as $tache) {
+             $temp += [$tache->getId()=>$tache->getPriorite()];
+             
+        }
+        asort($temp, SORT_NUMERIC );
+
+        foreach($temp as $id => $priorite){
+            $return += [$count => [$id=>$priorite]];
+            $count++;
+        }
+
+        $toCompare = null;
+
+        // currentPriorite => newPriorite
+        foreach($return as $index=>$tache){
+            foreach($tache as $id=>$priorite){
+                if($tacheId === $id){
+                    $toCompare = $index;
+                    $tache[$id] = $newPriorite;
+                    $return[$index] = [$id=>$tache[$id]];
+                }
+
+            }
+            
+        }
+
+        $lastValue = array_values($return[count($return) - 1])[0];
+       
+        // boucle pour decaler le tableau par 1
+        foreach($return as $index=>$tache){
+            if($index === $toCompare){
+                continue;
+            }
+            // si index plus petit que priorite a change
+            if($index > $toCompare){
+            
+                // echo array_values($tache)[0];
+                foreach($tache as $id =>$priorite){
+                    
+                   
+                    // si newPriorite est plus grand que la dernier valeur, newPriotie devient le dernier valuer
+                    if($newPriorite > $lastValue){
+                        $newPriorite = $lastValue; 
+                        $return[$toCompare] = [$tacheId=>$newPriorite];
+                    }
+
+                    if($newPriorite <= 0){
+                        $newPriorite = 1;
+                        $return[$toCompare] = [$tacheId=>$newPriorite];
+                    }
+
+                    // decale tableau par -1
+                    if($newPriorite >= $priorite && $newPriorite <=$lastValue ){
+
+                        $priorite--;
+                        $return[$index] = [$id=>$priorite];
+                    }
+                }
+            }
+
+             // si index plus grande que priorite a change
+            if($index < $toCompare){
+                
+                foreach($tache as $id=>$priorite){
+                    
+                    // Si newpriorite <= 0, newPriorite devient 1
+                    if($newPriorite <= 0){
+                        $newPriorite = 1;
+                        $return[$toCompare] = [$tacheId=>$newPriorite];
+                    }
+                    
+                    if($newPriorite > count($return)){
+                        
+                        $newPriorite = count($return);; 
+                        $return[$toCompare] = [$tacheId=>$newPriorite];
+                    }
+                   
+                   // decale tableau par +1
+                   if($newPriorite <= $priorite){
+                    $priorite++;
+                    $return[$index] = [$id=>$priorite];
+                   }
+                }
+            }
+        }
+        return $return;
+    }
+
+    private function changePriorite($taches = null)
+    {
+        foreach ($taches as $id => $priorite) {
+            Taches::updateAttributeById('priorite', $priorite, $id);
+        }
+    }
+
     private function delTache($idTache = null)
     {
         $this->updateTache($idTache);
 
         if (isset($_POST['oui'])) {
             Taches::deleteById($_GET['delete']);
-            header('location: index.php?page=afficheprojets');
+            echo '<meta http-equiv="refresh" content="0;URL=index.php?page=afficheprojets">';
         }
         if (isset($_POST['non'])) {
-            header('location: index.php?page=afficheprojets');
+            echo '<meta http-equiv="refresh" content="0;URL=index.php?page=afficheprojets">';
         }
     }
 
