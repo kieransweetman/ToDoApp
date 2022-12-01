@@ -30,6 +30,11 @@ class Security
             return $message;
         }
 
+        if(!password_verify($_POST['pwd'], $searchUser[0]->getPwd())){
+            $message = "Mot de passe non valide";
+            return $message;
+        }
+
         // Gestion login password_hash
         if ($pseudo === $searchUser[0]->getPseudo() && password_verify($_POST['pwd'], $searchUser[0]->getPwd())) {
             session_start();
