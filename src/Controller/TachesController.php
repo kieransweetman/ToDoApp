@@ -37,6 +37,11 @@ class TachesController
                     // 3. un algo avec le priorite change, qui boucle sur la liste des taches, et change la priorite
                     $tache = Taches::getById($idTache);
                     $projetId = $tache[0]->id_projets;
+                    
+                    if(($message =$this->verifyUpdateTask()) === ''){
+                        Taches::updateById();
+                    }
+
                     Taches::updateById();
 
                     $prioriteValide = $this->prioriteCheck($tache[0]->getPriorite(),$_POST["priorite"], $projetId, $tache[0]->getId());
@@ -47,9 +52,6 @@ class TachesController
                    
                     
                     
-                    if(($message =$this->verifyUpdateTask()) === ''){
-                        Taches::updateById();
-                    }
                     echo "<meta http-equiv='refresh' content='0;URL=index.php?page=afficheprojets'>";
                     return;
                 }
