@@ -183,7 +183,7 @@ class ProjetController
                     $view->setVar('pseudo', $_POST['pseudo']);
                     $view->setVar('pwd', $randPassword);
                     Affectation::createAffectation($_GET['update'], Users::getLastId(), '0');
-                    $view->setvar('users',$this->AfficheUsers());
+                    //header('location: index.php?page=afficheprojets&update='.$_GET['update']);
                 }
             } else {
                 //Message d'erreur
@@ -288,7 +288,6 @@ class ProjetController
         return $return;
     }
 
-    // fonction pour générer un mot de passe aléatoire
     private function RandPassword(){
         $chaineCor = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYAZ';
         $max = strlen($chaineCor);
