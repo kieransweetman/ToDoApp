@@ -220,7 +220,9 @@ class ProjetController
         //Stock tous les id Projet de l'utilisateur dans un tableau
         $tableauUser=[];
         foreach ($affectation as $affect){
-            $tableauUser[] = $affect->getId_projets();
+            if($affect->getAdmin() == 1){
+                $tableauUser[] = $affect->getId_projets();
+            }
         }
         //Créé un troisieme tableau qui ressort les id commun entre le tableauUser et le TableaiLibelle. Et donc si il y a un libellé identique sur le compte de l'utilisateur
         $intersect = [];
