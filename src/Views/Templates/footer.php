@@ -1,7 +1,7 @@
-        <footer>
-            <nav class="footerNav">
-                <p class="Auteurs">Authors :</p>
-                <ul>
+    <footer>
+    <nav class="footerNav">
+    <p class="Auteurs">Authors :</p>
+            <ul>
                     <li><a href="https://www.linkedin.com/in/gr%C3%A9gory-koch-206a1b163/">Grégory Koch <ion-icon name="logo-linkedin"></ion-icon>
                         </a></li>
                     <li><a href="https://www.linkedin.com/in/kieran-sweetman/">Kieran Sweetman <ion-icon name="logo-linkedin"></ion-icon>
@@ -17,7 +17,7 @@
                 </ul>
                 <p class="githubLink"><a href="https://github.com/kieransweetman/ToDoApp">
                         GitHub du Projet : <ion-icon name="logo-github"></ion-icon>
-                    </a></p>
+                    </a></p> 
             </nav>
         </footer>
         </body>
