@@ -12,7 +12,7 @@
                         $tache->id_users === $user
                     ) : ?>
                         <hr style="width: 100vw; color:black;">
-                        <section class="projet_<?php echo $projet->getId(); ?>">
+                        <section class="projet_<?php echo $projet->getId(); ?> formTask">
                             <h3><?php echo $projet->getLibelle(); ?></h3>
                             <div class="tache_<?php echo $tache->getId(); ?>">
                                 <form action="" method="POST" style="display:flex; flex-direction:column; gap:16px;">
@@ -55,11 +55,13 @@
 
                                 </form>
                             </div>
+
                         </section>
     <?php endif;
                 endforeach;
             endif;
         endforeach;
     endforeach; ?>
+    <hr style="width: 100vw; color:black;">
 
 </main>

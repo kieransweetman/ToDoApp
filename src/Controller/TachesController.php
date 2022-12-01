@@ -68,7 +68,7 @@ class TachesController
 
         if (isset($_POST['oui'])) {
             Taches::deleteById($_GET['delete']);
-            header('refresh:0; url=index.php?page=afficheprojets');
+            header('location: index.php?page=afficheprojets');
         }
         if (isset($_POST['non'])) {
             header('location: index.php?page=afficheprojets');
@@ -119,7 +119,7 @@ class TachesController
         // variables
 
         $view->setVar('tache', $tache[0]);
-        $view->setVar('TitrePage', 'Update un tache');
+        $view->setVar('TitrePage', 'Update une tâche');
         $view->setVar('users', $return);
         $view->setVar('projet', $projet[0]);
         $view->render();
@@ -127,7 +127,7 @@ class TachesController
 
     private function createTache($projet_id = null)
     {
-        $view = new Views('CreateUpdateTaches', 'Creez un Tache');
+        $view = new Views('CreateUpdateTaches', 'Creez une Tâche');
 
         if (Security::isConnected()) {
             $view->setVar('connected', true);
@@ -147,7 +147,7 @@ class TachesController
         }
         // variables
 
-        $view->setVar('TitrePage', 'Creez un Tache');
+        $view->setVar('TitrePage', 'Creez une Tâche');
         $view->setVar('projet_id', $projet_id);
         $view->setVar('users', $return);
         $view->setVar('projet', $projet[0]);
@@ -156,7 +156,7 @@ class TachesController
 
     private function AffichesTaches()
     {
-        $view = new Views('AfficheTaches', 'Mes Taches');
+        $view = new Views('AfficheTaches', 'Mes Tâches');
 
         if (Security::isConnected()) {
             $view->setVar('connected', true);
@@ -170,7 +170,7 @@ class TachesController
         $affectations = Affectation::getByAttribute('id_users', $user);
 
         // variables
-        $view->setVar('TitrePage', 'Mes Taches');
+        $view->setVar('TitrePage', 'Mes Tâches');
         $view->setVar('user', $user);
         $view->setVar('affectations', $affectations);
         $view->setVar('taches', $taches);

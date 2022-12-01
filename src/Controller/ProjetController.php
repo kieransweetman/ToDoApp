@@ -183,7 +183,7 @@ class ProjetController
                     $view->setVar('pseudo', $_POST['pseudo']);
                     $view->setVar('pwd', $randPassword);
                     Affectation::createAffectation($_GET['update'], Users::getLastId(), '0');
-                    $view->setvar('users',$this->AfficheUsers());
+                    //header('location: index.php?page=afficheprojets&update='.$_GET['update']);
                 }
             } else {
                 //Message d'erreur
@@ -241,7 +241,7 @@ class ProjetController
         if (isset($_POST['pseudo'])) {
             $pseudo = Users::getByAttribute('pseudo', $_POST['pseudo']);
             if (count($pseudo) == 0) {
-                $return .= "Veuillez créer l'utilisateur <a href='index.php?page=afficheprojets&update=".$_GET['update']."&insertuser'>Cliquez ici<br></a><br>";
+                $return .= "Veuillez créer l'utilisateur<br><a class='créerCompte' href='index.php?page=afficheprojets&update=".$_GET['update']."&insertuser'>Cliquez ici<br></a><br>";
             }
         }
         return $return;
@@ -288,7 +288,6 @@ class ProjetController
         return $return;
     }
 
-    // fonction pour générer un mot de passe aléatoire
     private function RandPassword(){
         $chaineCor = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYAZ';
         $max = strlen($chaineCor);

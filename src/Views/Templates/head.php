@@ -8,6 +8,9 @@
     <meta name="description" content="Gérez vos projets ">
     <meta name="author" content="Gregory, Kieran, Enzo, Christine, Loai ">
     <title><?php echo $title; ?></title>
+    <!-- Imports svg -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js" defer></script>
 </head>
 
 <body>

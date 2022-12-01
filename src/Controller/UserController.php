@@ -56,7 +56,7 @@ class UserController
     public function UpdateUser()
     {
         $view = new Views('CreateUpdateCompte', 'Modification d\'un utilisateur');
-        $view->setVar('TitrePage', 'Modifier mon compte');
+        $view->setVar('TitrePage', 'Mon compte');
         if (Security::isConnected()) {
             $view->setVar('connected', true);
             $user = Users::getById($_GET['update']);
