@@ -1,3 +1,4 @@
+        <?php ?>
         <footer>
             <nav class="footerNav">
                 <p class="Auteurs">Authors :</p>

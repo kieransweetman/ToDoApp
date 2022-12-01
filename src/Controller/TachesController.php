@@ -33,7 +33,7 @@ class TachesController
                     // 2. les ordonnee par priorite
                     // 3. un algo avec le priorite change, qui boucle sur la liste des taches, et change la priorite
                     Taches::updateById();
-                    return  header("location: index.php?page=afficheprojets");
+                    echo '<meta http-equiv="refresh" content="0;URL=index.php?page=afficheprojets">';
                 }
             }
 
@@ -61,10 +61,10 @@ class TachesController
 
         if (isset($_POST['oui'])) {
             Taches::deleteById($_GET['delete']);
-            header('location: index.php?page=afficheprojets');
+            echo '<meta http-equiv="refresh" content="0;URL=index.php?page=afficheprojets">';
         }
         if (isset($_POST['non'])) {
-            header('location: index.php?page=afficheprojets');
+            echo '<meta http-equiv="refresh" content="0;URL=index.php?page=afficheprojets">';
         }
     }
 

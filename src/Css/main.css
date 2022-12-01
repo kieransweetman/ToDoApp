@@ -81,8 +81,8 @@ footer {
     color: #f1f1f1;
     font-size: 20px;
     padding: 20px 0px;
-    position: fixed;
     bottom: 0;
+    position: absolute;
 }
 
 .footerNav {
@@ -146,6 +146,39 @@ footer {
     transform: translate(-50%, -50%);
     font-size: 5vw;
     color: #E9C46A;
+}
+
+/*Liste Projets*/
+.listProjet{
+    text-align: center;
+    color: #264653;
+}
+
+.listProjet a{
+    text-decoration: none;
+    color:#f1f1f1;
+    border-radius: 5px;
+    background-color: #2A9D8F;
+    margin: 5px 5px 5px 5px;
+}
+
+.projet{
+    margin: 50px 5px;
+}
+
+.creP{
+    display: flex;
+    justify-content: center;
+}
+
+.creP a{
+    color:#f1f1f1;
+    text-decoration: none;
+    align-items: center;
+    background-color: #264653 ;
+    text-align: center;
+    width: 40%;
+    border-radius: 5px;
 }
 
 /*Liste utilisateurs*/
@@ -213,5 +246,4 @@ footer {
     flex-direction: column;
     align-items: center;
     height: 100px;
-    margin-top: 30px;
 }
