@@ -1,12 +1,17 @@
 <?php
-echo "<a href='index.php?page=" . $_GET['page'] . "&insert=projet'>Créer un nouveau projet</a>";
 echo '<h2>Liste de mes projets</h2>';
+
+echo '<div class="creP">';
+echo "<a href='index.php?page=" . $_GET['page'] . "&insert=projet'>Créer un nouveau projet</a><br>";
+echo '</div>';       
+
+echo '<div class= "listProjet">';
 
 //Boucle sur les affectations
 foreach ($affectations as $affectation) {
-    
     //Boucle pour afficher les projets
     foreach ($projets as $projet) {
+        echo "<div class='projet'>";
         //Condition pour afficher seulement les projets pour lesquels l'utilisateur courant est administrateur
         if ($_SESSION['id'] === $affectation->getId_users() && $affectation->getId_projets() === $projet->getId() && $affectation->getAdmin() === true) {
             echo $projet->getLibelle();
@@ -40,7 +45,9 @@ foreach ($affectations as $affectation) {
             }
             echo '<br>';
         }
+        echo "</div>";
     }
 }
+echo '</div>';
 
 ?>

@@ -1,0 +1,249 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+*,
+::before,
+::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    list-style: none;
+    font-weight: bold;
+}
+
+header {
+    background: #264653;
+}
+
+.h1-container {
+    width: 100%;
+    min-height: 100px;
+}
+
+h2{
+    text-align: center;
+    font-size: 50px;
+    color: #caa13a;
+}
+
+h3{
+    text-align: center;
+    font-size: 25px;
+    color: #264653;
+    margin-bottom: 20px;
+}
+
+.appTitle {
+    color: #f1f1f1;
+    text-align: center;
+    animation: appear 3s;
+    letter-spacing: 1px;
+    font-size: 64px;
+}
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+        font-size: 8px;
+    }
+
+    100% {
+        font-size: 64px;
+        opacity: 1;
+    }
+}
+
+.navBar {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-right: 0px 50px;
+}
+
+.navBar a {
+    text-decoration: none;
+    color: #f1f1f1;
+    font-size: 20px;
+}
+
+.navBar a:hover {
+    color: #c2c2c2;
+    font-size: 26px;
+    transition: font-size 1s;
+}
+
+
+/* footer */
+
+footer {
+    width: 100%;
+    background: #2A9D8F;
+    color: #f1f1f1;
+    font-size: 20px;
+    padding: 20px 0px;
+    bottom: 0;
+    position: absolute;
+}
+
+.footerNav {
+    width: 100%;
+}
+
+.Auteurs {
+    text-align: center;
+    text-decoration: underline;
+    margin-bottom: 20px;
+}
+
+.footerNav ul {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.footerNav ul a {
+    text-decoration: none;
+    color: #f1f1f1;
+    font-size: 20px;
+}
+
+.footerNav ul a ion-icon {
+    font-size: 26px;
+    position: relative;
+    top: 5px;
+}
+
+.footerNav ul a:hover {
+    font-size: 26px;
+    transition: font-size 1s;
+}
+
+.githubLink {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.githubLink a {
+    text-decoration: none;
+    color: #f1f1f1;
+}
+
+.githubLink a ion-icon {
+    color: #f1f1f1;
+    text-decoration: none;
+    font-size: 30px;
+    position: relative;
+    top: 5px;
+}
+
+/* default Page */
+
+.helloUser {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 5vw;
+    color: #E9C46A;
+}
+
+/*Liste Projets*/
+.listProjet{
+    text-align: center;
+    color: #264653;
+}
+
+.listProjet a{
+    text-decoration: none;
+    color:#f1f1f1;
+    border-radius: 5px;
+    background-color: #2A9D8F;
+    margin: 5px 5px 5px 5px;
+}
+
+.projet{
+    margin: 50px 5px;
+}
+
+.creP{
+    display: flex;
+    justify-content: center;
+}
+
+.creP a{
+    color:#f1f1f1;
+    text-decoration: none;
+    align-items: center;
+    background-color: #264653 ;
+    text-align: center;
+    width: 40%;
+    border-radius: 5px;
+}
+
+/*Liste utilisateurs*/
+.listUser{
+    text-align: center;
+}
+
+.validation{
+    text-align: center;
+}
+
+/*Formulaires*/
+.form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.form p {
+    color: #E76F51;
+    font-weight: bold;
+}
+
+.errorMsg {
+    display: flex;
+    justify-content: center;
+    color: #E76F51;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/*Formulaire Login*/
+.créerCompte{
+    text-decoration: none;
+}
+
+/*Formulaire Tâches*/
+.formTask{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formTask form{
+    width: 100%;
+    color: #264653;
+}
+
+/*Formulaire Add Create Task*/
+.formTaskCU{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 100%;
+    height: 500px;
+    align-items: center;
+}
+
+/*Formulaires Projet*/
+.formProject{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100px;
+}
