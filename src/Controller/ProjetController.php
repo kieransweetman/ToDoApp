@@ -138,7 +138,7 @@ class ProjetController
             }
         }
         if (($message1 = $this->isValidAddUser()) === '') {
-            if (isset($_POST['pseudo'])) {
+            if (isset($_POST['addUser'])) {
                 $user = Users::getByAttribute('pseudo', $_POST['pseudo']);
                 $id_user = $user[0]->getId();
                 //Créer affectation à un utilisateur non admin
