@@ -77,7 +77,7 @@ class TachesController
         }
     }
 
-    private function prioriteCheck($currentPriorite = null, $newPriorite = null, $projet_id, $tacheId)
+    private function prioriteCheck($currentPriorite = null, $newPriorite = null, $projet_id = null, $tacheId = null)
     {
 
         //definir les tableau pour check et faire les changements
