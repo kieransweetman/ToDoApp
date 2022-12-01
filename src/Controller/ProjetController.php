@@ -138,14 +138,18 @@ class ProjetController
             }
         }
         if (($message1 = $this->isValidAddUser()) === '') {
-            if (isset($_POST['pseudo'])) {
+            if (isset($_POST['addUser'])) {
                 $user = Users::getByAttribute('pseudo', $_POST['pseudo']);
                 $id_user = $user[0]->getId();
                 //Créer affectation à un utilisateur non admin
+                if (($message1 = $this->isValidAddAdmin()) === '') {
                 Affectation::createAffectation($_GET['update'], $id_user, '0');
                 $view->setVar('message1', 'L\'utilisateur a bien été ajouté');
                 header('location: index.php?page=afficheprojets&update='.$_GET['update']);
+            }else {
+                $view->setVar('message1', $message1);
             }
+        }
         } else {
             $view->setVar('message1', $message1);
         }
@@ -162,6 +166,28 @@ class ProjetController
                 elseif (isset($_POST['non'])) {
                     header('location: index.php?page=afficheprojets&update='.$_GET['update']);
                 }
+            }
+        }
+        //Ajout d'un utilisateur par l'admin
+        if (isset($_POST['submit'])) {
+            if (($message2 = $this->isValidCreateUserAdmin()) === '') {
+                //Suppression de SUBMIT
+                unset($_POST['submit']);
+                //Génération d'un password du password
+                $randPassword = $this->RandPassword();
+                $_POST['pwd'] = password_hash($randPassword, PASSWORD_DEFAULT);
+                //Creation du User dans la BDD
+                if (Users::create()) {
+                    //Affichage des valeur quand le formulaire est confirmé
+                    $view->setVar('message2', "L'utilisateur a bien été créé <br>");
+                    $view->setVar('pseudo', $_POST['pseudo']);
+                    $view->setVar('pwd', $randPassword);
+                    Affectation::createAffectation($_GET['update'], Users::getLastId(), '0');
+                    $view->setvar('users',$this->AfficheUsers());
+                }
+            } else {
+                //Message d'erreur
+                $view->setVar('message2', $message2);
             }
         }
         $view->render();
@@ -194,7 +220,9 @@ class ProjetController
         //Stock tous les id Projet de l'utilisateur dans un tableau
         $tableauUser=[];
         foreach ($affectation as $affect){
-            $tableauUser[] = $affect->getId_projets();
+            if($affect->getAdmin() == 1){
+                $tableauUser[] = $affect->getId_projets();
+            }
         }
         //Créé un troisieme tableau qui ressort les id commun entre le tableauUser et le TableaiLibelle. Et donc si il y a un libellé identique sur le compte de l'utilisateur
         $intersect = [];
@@ -213,9 +241,62 @@ class ProjetController
         if (isset($_POST['pseudo'])) {
             $pseudo = Users::getByAttribute('pseudo', $_POST['pseudo']);
             if (count($pseudo) == 0) {
-                $return .= "Veuillez créer l'utilisateur <a href='index.php?page=afficheprojets&update=".$_GET['update']."&adduser='>Cliquez ici<br></a><br>";
+                $return .= "Veuillez créer l'utilisateur <a href='index.php?page=afficheprojets&update=".$_GET['update']."&insertuser'>Cliquez ici<br></a><br>";
             }
         }
         return $return;
+    }
+
+    private function isValidAddAdmin()
+    {
+        $return = '';
+        // Validation du formulaire pour qu'un admin ne puisse pas s'affecter à un projet qu'il a créé
+        if (isset($_POST['pseudo'])) {
+            $pseudo = Users::getByAttribute('pseudo', $_POST['pseudo']);
+            $affectation = Affectation::getByAttribute('id_users', $_SESSION['id']);
+            if ($pseudo[0]->getId() == $affectation[0]->getId_user()) {
+                $return .= "Un admnistrateur ne peut pas être affecté à un projet";
+            }
+        }
+        return $return;
+    }  
+
+
+    private function isValidCreateUserAdmin(){
+    // Validation du formulaire pour qu'un admin créé un autre utilisateur
+        $return = '';
+        if(isset ($_POST['pseudo'])){
+            $return .= Validate::ValidatePseudo($_POST['pseudo'], 'Le pseudo n\'est pas valide<br>');
+        }
+        if(isset ($_POST['mail'])){
+            $return .= Validate::ValidateEmail($_POST['mail']);
+        }
+        // Validation du formulaire si le mail n'est pas dans la BDD 
+        if(isset ($_POST['mail'])){
+            $user = Users::getByAttribute('mail', $_POST['mail']);
+            if (count($user) > 0) {
+                $return .= "Le mail existe déjà<br>";
+            }
+        }
+        // Validation du formulaire si le pseudo n'est pas dans la BDD 
+        if(isset ($_POST['pseudo'])){
+            $pseudo = Users::getByAttribute('pseudo', $_POST['pseudo']);
+            if (count($pseudo) > 0) {
+                $return .= "Le pseudo existe déjâ<br>";
+            }
+        }
+        return $return;
+    }
+
+    // fonction pour générer un mot de passe aléatoire
+    private function RandPassword(){
+        $chaineCor = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYAZ';
+        $max = strlen($chaineCor);
+        $pwd = '';
+        for ($i = 0; $i<8; $i++){
+            $car = rand (0, $max-1);
+            $pwd .= $chaineCor[$car];    
+        }
+        return $pwd;
     }
 }

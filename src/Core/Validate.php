@@ -53,4 +53,20 @@ class Validate
         }
         return $return;
     }
+
+    /**
+     * Fonction pour vérifier les entrées des formulaires taches
+     *
+     * @param string $attribut
+     * @param string $message
+     * @return string
+     */
+    public static function validateTask($attribut, $message)
+    {
+        $return = '';
+        if ($attribut === '') {
+            $return = $message;
+        }
+        return $return;
+    }
 }

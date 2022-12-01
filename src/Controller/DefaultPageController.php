@@ -14,16 +14,13 @@ class DefaultPageController
 
         if (isset($_POST['submit'])) {
             $status = Security::ConnectUser();
+            $view->setVar('message', $status);
         }
 
         if (Security::isConnected()) {
             $view->setVar('connected', true);
         } else {
             $view->setVar('connected', false);
-        }
-
-        if($status){
-            $view->setVar('message', $status);
         }
 
         $view->setVar('TitrePage', 'ToDoApp');

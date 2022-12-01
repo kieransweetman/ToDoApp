@@ -6,6 +6,7 @@ use Digi\Todoapp\Model\Taches;
 use Digi\Todoapp\Model\Users;
 use Digi\Todoapp\Core\Security;
 use Digi\Todoapp\Core\Views;
+use Digi\Todoapp\Core\Validate;
 use Digi\Todoapp\Model\Affectation;
 use Digi\Todoapp\Model\Projets;
 
@@ -21,7 +22,9 @@ class TachesController
                 $this->createTache($projet);
             }
             if (isset($_POST['create'])) {
-                Taches::create();
+                if(($message = $this->verifyCreateTask()) === ''){
+                    Taches::create();
+                }
             }
 
             if (isset($_GET['update'])) {
@@ -43,6 +46,10 @@ class TachesController
                     
                    
                     
+                    
+                    if(($message =$this->verifyUpdateTask()) === ''){
+                        Taches::updateById();
+                    }
                     echo "<meta http-equiv='refresh' content='0;URL=index.php?page=afficheprojets'>";
                     return;
                 }
@@ -56,7 +63,9 @@ class TachesController
 
         if ($_GET['page'] === 'affichetaches') {
             if (isset($_POST['submit'])) {
-                $this->changeStatut();
+                if(($message =$this->verifyUpdateTask()) === ''){
+                    $this->changeStatut();
+                }
                 $this->AffichesTaches();
                 return;
             } else {
@@ -284,5 +293,24 @@ class TachesController
         $view->setVar('taches', $taches);
         $view->setVar('projets', $projets);
         $view->render();
+    }
+
+    // fonction pour vérifier les entrées de formulaire sur une création de tache
+    private function verifyCreateTask()
+    {
+        $return = '';
+        $return .= Validate::validateTask($_POST['titre'], 'Le nom doit être renseigné <br>');
+        $return .= Validate::validateTask($_POST['priorite'], 'La priorité doit être renseigné <br>');
+        $return .= Validate::validateTask($_POST['statut'], 'Le statut doit être renseigné <br>');
+        $return .= Validate::validateTask($_POST['description'], 'La Description doit être renseigné <br>');
+        return $return;
+    }
+
+    // fonction pour vérifier l'entré status de formulaire sur une modification de tache
+    private function verifyUpdateTask()
+    {
+        $return = '';
+        $return .= Validate::validateTask($_POST['statut'], 'Le statut doit être renseigné <br>');
+        return $return;
     }
 }

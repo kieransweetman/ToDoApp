@@ -26,7 +26,12 @@ class Security
         $searchUser = Users::getByAttribute('pseudo', $pseudo);
 
         if(!$searchUser){
-            $message = "ce compte n'existe pas/ Ou vous n'avez pas saisie vos identifiants correctement";
+            $message = "Ce compte n'existe pas/ Ou vous n'avez pas saisie vos identifiants correctement";
+            return $message;
+        }
+
+        if(!password_verify($_POST['pwd'], $searchUser[0]->getPwd())){
+            $message = "Mot de passe non valide";
             return $message;
         }
 
