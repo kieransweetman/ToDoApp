@@ -20,6 +20,19 @@ header {
     min-height: 100px;
 }
 
+h2{
+    text-align: center;
+    font-size: 50px;
+    color: #caa13a;
+}
+
+h3{
+    text-align: center;
+    font-size: 25px;
+    color: #264653;
+    margin-bottom: 20px;
+}
+
 .appTitle {
     color: #f1f1f1;
     text-align: center;
@@ -135,6 +148,16 @@ footer {
     color: #E9C46A;
 }
 
+/*Liste utilisateurs*/
+.listUser{
+    text-align: center;
+}
+
+.validation{
+    text-align: center;
+}
+
+/*Formulaires*/
 .form {
     position: absolute;
     top: 50%;
@@ -152,4 +175,43 @@ footer {
     justify-content: center;
     color: #E76F51;
     margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/*Formulaire Login*/
+.créerCompte{
+    text-decoration: none;
+}
+
+/*Formulaire Tâches*/
+.formTask{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formTask form{
+    width: 100%;
+    color: #264653;
+}
+
+/*Formulaire Add Create Task*/
+.formTaskCU{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 100%;
+    height: 500px;
+    align-items: center;
+}
+
+/*Formulaires Projet*/
+.formProject{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100px;
+    margin-top: 30px;
 }

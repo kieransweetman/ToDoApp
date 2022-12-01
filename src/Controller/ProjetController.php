@@ -241,7 +241,7 @@ class ProjetController
         if (isset($_POST['pseudo'])) {
             $pseudo = Users::getByAttribute('pseudo', $_POST['pseudo']);
             if (count($pseudo) == 0) {
-                $return .= "Veuillez créer l'utilisateur <a href='index.php?page=afficheprojets&update=".$_GET['update']."&insertuser'>Cliquez ici<br></a><br>";
+                $return .= "Veuillez créer l'utilisateur<br><a class='créerCompte' href='index.php?page=afficheprojets&update=".$_GET['update']."&insertuser'>Cliquez ici<br></a><br>";
             }
         }
         return $return;

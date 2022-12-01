@@ -1,6 +1,6 @@
 <?php
-echo "<a href='index.php?page=" . $_GET['page'] . "&insert=projet'>Créer un nouveau projet</a>";
 echo '<h2>Liste de mes projets</h2>';
+echo "<a href='index.php?page=" . $_GET['page'] . "&insert=projet'>Créer un nouveau projet</a><br>";
 
 //Boucle sur les affectations
 foreach ($affectations as $affectation) {

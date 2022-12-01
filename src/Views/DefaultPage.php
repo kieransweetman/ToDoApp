@@ -20,6 +20,6 @@
             <input type='submit' name='submit' value='Se connecter'>
 
         </form>
-        <a href='index.php?page=CreateUpdateCompte'> Créer un compte</a>
+        <a class="créerCompte" href='index.php?page=CreateUpdateCompte'> Créer un compte</a>
     </div>
 <?php endif; ?>
