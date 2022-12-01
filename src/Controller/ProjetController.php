@@ -184,6 +184,7 @@ class ProjetController
                     $view->setVar('pwd', $randPassword);
                     Affectation::createAffectation($_GET['update'], Users::getLastId(), '0');
                     //header('location: index.php?page=afficheprojets&update='.$_GET['update']);
+                    
                 }
             } else {
                 //Message d'erreur
