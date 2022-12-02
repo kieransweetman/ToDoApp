@@ -30,8 +30,8 @@ if(isset($_GET['update'])) :
 
 <p class="validation"><?php echo (isset($message2)) ? $message2 : '';?>  </p>
 
-<p class="validation"><?php echo (isset($pseudo)) ? "L'identifiant de l'utilisateur est $pseudo" : ''; ?>  </p>
-<p class="validation"><?php echo (isset($pwd)) ? "Le mot de passe à communiquer à l'utilisateur est $pwd" : ''; ?>  </p>
+<p class="validation"><?php echo (isset($pseudo)) ? "L'identifiant de l'utilisateur est <span>$pseudo</span>" : ''; ?>  </p>
+<p class="validation"><?php echo (isset($pwd)) ? "Le mot de passe à communiquer à l'utilisateur est <span>$pwd</span>" : ''; ?>  </p>
 <?php  endif ;?>
 
 
@@ -41,7 +41,7 @@ if(isset($_GET['update'])) :
 foreach($users as $user){
     echo "<p class='listUser'>".$user->getPseudo()."<a href='index.php?page=" . $_GET['page'] .'&update='.$_GET['update']."&deleteuser=".$user->getPseudo()."'>Désaffecter</a></p><br>";
     if(isset($_GET['deleteuser']) && $_GET['deleteuser'] === $user->getPseudo()){
-        echo "Êtes-vous certain(e) de vouloir effectuer la désaffectation? Si une tâche lui été affecté, elle n'aura plus d'utilisateur affecté";
+        echo "<p>Êtes-vous certain(e) de vouloir effectuer la désaffectation? Si une ou plusieurs tâches sont en cours chez lui, elle n'aura plus d'utilisateur affecté</p>";
         echo "<form method='POST'><input type='submit' name='oui' value ='Oui''><input type='submit' name='non' value ='Non''></form>";
     }
 }

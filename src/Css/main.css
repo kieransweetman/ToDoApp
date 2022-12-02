@@ -11,6 +11,7 @@
     font-weight: bold;
 }
 
+/*Header Titres et Nav*/
 header {
     background: #264653;
 }
@@ -30,11 +31,8 @@ h3{
     text-align: center;
     font-size: 25px;
     color: #264653;
+    margin-top: 20px;
     margin-bottom: 20px;
-}
-
-main{
-    min-height: 70vh;
 }
 
 .appTitle {
@@ -74,6 +72,10 @@ main{
     color: #c2c2c2;
     font-size: 26px;
     transition: font-size 1s;
+}
+
+main{
+    min-height: 70vh;
 }
 
 
@@ -143,8 +145,49 @@ footer {
 /* default Page */
 
 .helloUser {
-    font-size: 5vw;
+    font-size: 6rem;
     color: #E9C46A;
+    position: absolute;
+    left: 35%;
+    top: 50%;
+}
+
+/*FormulaireLogin*/
+.formLogin {
+    position: absolute;
+    left: 32%;
+    top: 50%;
+}
+
+.formLogin input[type=text]{
+    border: 1px solid #264653;
+    border-radius: 5px;
+    width: 200px;
+}
+
+.errorMsg {
+    display: flex;
+    justify-content: center;
+    color: red;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.créerCompte{
+    text-decoration: none;
+}
+
+/*Formulaire Compte*/
+.formCompte{
+    position: absolute;
+    left: 42%;
+    top: 45%;
+}
+
+.formCompte input[type=text],[type=email],[type=password]{
+    border: 1px solid #264653;
+    border-radius: 5px;
+    width: 200px;
 }
 
 /*Liste Projets*/
@@ -180,7 +223,21 @@ footer {
     border-radius: 5px;
 }
 
-/*Liste utilisateurs*/
+/*Formulaires Projet*/
+.formProject{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.formProject input[type=text]{
+    border: 1px solid #264653;
+    border-radius: 5px;
+}
+
+/*Liste utilisateurs Projet*/
 .listUser{
     text-align: center;
 }
@@ -189,29 +246,9 @@ footer {
     text-align: center;
 }
 
-/*FormulaireLogin*/
-.formLogin {
-    position: absolute;
-    left: 40%;
-    top: 50%;
-}
-
-.formLogin p {
+.validation span{
     color: #E76F51;
     font-weight: bold;
-}
-
-.errorMsg {
-    display: flex;
-    justify-content: center;
-    color: #E76F51;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-/*Formulaire Login*/
-.créerCompte{
-    text-decoration: none;
 }
 
 /*Formulaire Tâches*/
@@ -235,13 +272,4 @@ footer {
     width: 100%;
     height: 500px;
     align-items: center;
-}
-
-/*Formulaires Projet*/
-.formProject{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100px;
 }

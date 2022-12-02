@@ -11,7 +11,6 @@ class DefaultPageController
     public function __construct()
     {
         $view = new Views('DefaultPage', 'Accueil');
-
         if (isset($_POST['submit'])) {
             $status = Security::ConnectUser();
             $view->setVar('message', $status);
