@@ -1,5 +1,5 @@
-<h2>Listes de mes taches</h2>
 <main>
+<h2>Listes de mes taches</h2>
     <?php foreach ($affectations as $affectation) :
         foreach ($projets as $projet) :
             if ($user === $affectation->getId_user() && $affectation->getId_projets() === $projet->getId()) :

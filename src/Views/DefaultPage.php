@@ -1,3 +1,4 @@
+<main>
 <p class="helloUser">
     <?php
     if ($connected) {
@@ -8,11 +9,8 @@
     ?>
 </p>
 
-
-
-
 <?php if ($connected != true) : ?>
-    <div class="form">
+    <div class="formLogin">
         <p><?php echo isset($message) ? $message : "";  ?></p>
         <form method='POST' action='index.php'>
             <input name='pseudo' type='text' placeholder='Pseudo'>
@@ -23,3 +21,4 @@
         <a class="créerCompte" href='index.php?page=CreateUpdateCompte'> Créer un compte</a>
     </div>
 <?php endif; ?>
+</main>

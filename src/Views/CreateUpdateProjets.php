@@ -1,3 +1,4 @@
+<main>
 <form method="POST" class="formProject" action="index.php?page=<?php echo $_GET['page'].$action?>">
     <label for="libelle">Nom du Projet</label><br>
     <input type="text" name="libelle" id="libelle" value="<?php echo (isset($libelle)) ? $libelle : ''; ?>" required><br>
@@ -46,3 +47,4 @@ foreach($users as $user){
 }
 endif ;
 ?>
+</main>

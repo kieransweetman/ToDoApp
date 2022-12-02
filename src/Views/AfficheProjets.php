@@ -1,3 +1,4 @@
+<main>
 <?php
 echo '<h2>Liste de mes projets</h2>';
 
@@ -49,5 +50,6 @@ foreach ($affectations as $affectation) {
     }
 }
 echo '</div>';
-
+echo '</main>';
 ?>
+</main>

@@ -1,3 +1,4 @@
+<main>
 <?php
 //affichage des messages d'erreurs
 if (isset($message)) {
@@ -29,3 +30,4 @@ if (isset($message)) {
     </form>
 
 <?php endif ?>
+</main>
