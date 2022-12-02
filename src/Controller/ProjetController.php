@@ -160,7 +160,7 @@ class ProjetController
             if(isset($_GET['deleteuser'])){
                 if (isset($_POST['oui'])) {
                     Affectation::deleteByTwoAttributes('id_users', $id_user, 'id_projets', $_GET['update'] );
-                    //désaffectation des tâches
+                    //\\désaffectation des tâches
                     header('location: index.php?page=afficheprojets&update='.$_GET['update']);
                 }
                 elseif (isset($_POST['non'])) {
