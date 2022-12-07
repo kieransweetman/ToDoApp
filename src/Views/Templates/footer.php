@@ -18,7 +18,7 @@
                 </ul>
                 <p class="githubLink"><a href="https://github.com/kieransweetman/ToDoApp">
                         GitHub du Projet : <ion-icon name="logo-github"></ion-icon>
-                    </a></p>
+                    </a></p> 
             </nav>
         </footer>
         </body>
